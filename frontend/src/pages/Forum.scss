@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+$sidepanel-bg: rgb(245, 249, 253);
+$sidepanel: rgb(235, 240, 246);
+$body: rgb(128, 132, 136);
+$notification: rgb(31, 141, 251);
+$chat-bg: #e5ddd5; // Fond WhatsApp
+$self-bubble: #dcf8c6; // Vert clair pour les messages de l'utilisateur
+$other-bubble: #ffffff; // Blanc pour les autres
+
+.forum-app {
+  display: flex;
+  max-width: 1400px;
+  margin: 2rem auto;
+  background: #fcfcfc;
+}
+
+.forum-sidepanel {
+  flex-basis: 20%;
+  background-color: $sidepanel-bg;
+  padding: 1.5rem;
+
+  &__nav {
+    border-radius: 8px;
+    background-color: $sidepanel;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 500;
+      color: $body;
+      padding: 1rem;
+      border-bottom: 1px solid darken($sidepanel, 3%);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    &__li {
+      padding: 1rem;
+      border-bottom: 1px solid darken($sidepanel, 3%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      color: $body;
+
+      &:hover {
+        background-color: darken($sidepanel, 5%);
+      }
+
+      &.active {
+        background-color: $notification;
+        color: #fff;
+
+        .forum-notification {
+          background-color: darken($notification, 10%);
+        }
+      }
+    }
+  }
+}
+
+.forum-notification {
+  font-size: 10px;
+  color: #fff;
+  background-color: $notification;
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.forum-content {
+  flex-basis: 80%;
+}
+
+.forum-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #f1f4f6;
+  display: flex;
+  justify-content: flex-end;
+
+  ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+  }
+
+  &__li {
+    margin: 0 1rem;
+
+    .forum-profile-pic {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 1px solid $notification;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: rgb(150, 150, 150);
+    font-size: 14px;
+
+    &--active {
+      color: $notification;
+    }
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.forum-messages {
+  padding: 1rem;
+  background: $chat-bg;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    padding: 0.5rem 0;
+    background: #fff;
+    border-bottom: 1px solid #f1f4f6;
+
+    h2 {
+      font-size: 18px;
+      color: $body;
+      padding-left: 1rem;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem 0;
+  }
+
+  .forum-message {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    &--self {
+      justify-content: flex-end;
+
+      .forum-bubble {
+        flex-direction: row-reverse;
+
+        .forum-bubble__content {
+          background-color: $self-bubble;
+          border-radius: 10px 10px 0 10px;
+          margin-right: 0.5rem;
+        }
+
+        .forum-bubble__photo {
+          margin-left: 0.5rem;
+          margin-right: 0;
+        }
+      }
+    }
+
+    .forum-bubble {
+      display: flex;
+      align-items: flex-start;
+      max-width: 70%;
+
+      &__photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        border: 1px solid #ddd;
+      }
+
+      &__content {
+        background-color: $other-bubble;
+        padding: 0.8rem 1rem;
+        border-radius: 10px 10px 10px 0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        color: #333;
+
+        .forum-sender {
+          font-size: 12px;
+          color: $notification;
+          margin-bottom: 0.2rem;
+          display: block;
+        }
+
+        .forum-bubble__text {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          .forum-time {
+            font-size: 10px;
+            color: #999;
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.forum-input {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fff;
+  border-top: 1px solid #f1f4f6;
+
+  input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-right: 1rem;
+    outline: none;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: $notification;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($notification, 10%);
+    }
+  }
+}

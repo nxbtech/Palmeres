@@ -1,0 +1,67 @@
+.holiday-section {
+  padding: 4rem 0;
+}
+
+.holiday-container {
+  width: 100%;
+  margin: 0 auto;
+  height: 240px; // Légèrement plus haut que l'original (204px)
+  position: relative;
+  overflow: hidden;
+  background: no-repeat center / cover url(https://leloc90.github.io/loveTravel/assets/images/parallax-search-2.jpg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+    .holiday-btn {
+      background: #ff8200;
+      color: #fff;
+    }
+  }
+}
+
+.holiday-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3); // Overlay sombre pour lisibilité
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.holiday-container:hover .holiday-content {
+  background: rgba(0, 0, 0, 0.5); // Plus sombre au hover
+}
+
+h4 {
+  font-size: 2rem; // 32px, réduit de 46px pour un look plus équilibré
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.holiday-btn {
+  display: inline-block;
+  padding: 0.75rem 2rem; // Plus compact que 20px 40px
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem; // 16px, réduit de 18px
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 20px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

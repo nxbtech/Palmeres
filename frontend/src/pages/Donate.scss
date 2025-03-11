@@ -1,0 +1,104 @@
+.donate-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 40px 20px;
+  background: #f8f9fa;
+
+  .donate-container {
+    background: #fff;
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .donate-message {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .donate-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .amount-options {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+
+        button {
+          background: #e9ecef;
+          color: #333;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 25px;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background 0.3s, color 0.3s;
+
+          &:hover {
+            background: #007bff;
+            color: #fff;
+          }
+        }
+      }
+
+      input {
+        padding: 12px 20px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        font-size: 1rem;
+        color: #333;
+        text-align: center;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+        }
+      }
+
+      button[type="submit"] {
+        background: #28a745;
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: background 0.3s, transform 0.2s;
+
+        &:hover {
+          background: #218838;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .success-status {
+      margin-top: 1rem;
+      color: #28a745;
+      font-size: 1rem;
+    }
+
+    .error-status {
+      margin-top: 1rem;
+      color: #dc3545;
+      font-size: 1rem;
+    }
+  }
+}

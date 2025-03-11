@@ -1,0 +1,72 @@
+.page-layout {
+    width: 100%;
+  }
+  
+  .page-content {
+    width: 80%;
+    max-width: 1200px;
+    margin: 60px auto;
+    text-align: center;
+  
+    h1 {
+      font-size: 36px;
+      color: #ff8200;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+  
+    a {
+      color: #ff8200;
+      text-decoration: none;
+      font-size: 16px;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+  
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #fff;
+        border: 2px solid #ff8200;
+        border-radius: 5px;
+        color: #ff8200;
+        cursor: pointer;
+        transition: background-color 0.3s;
+  
+        &.active {
+          background-color: #ff8200;
+          color: #fff;
+        }
+  
+        &:hover {
+          background-color: #ff8200;
+          color: #fff;
+        }
+      }
+    }
+  
+    .tab-content {
+      margin-top: 20px;
+    }
+  }
+
+  /* Ajouter à la fin de PageLayout.scss */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }

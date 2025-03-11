@@ -1,0 +1,203 @@
+
+  .product-detail-container {
+    background-color: #fff;
+    color: #333;
+    max-width: 1200px;
+    width: 97%;
+    margin: 25px 0;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr;
+    padding: 50px 70px;
+    box-sizing: border-box;
+  
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 40px 0;
+  
+      .product-info {
+        padding-left: 70px;
+        max-width: 100%;
+  
+        h1 {
+          font-size: 2.5em;
+          margin-bottom: 10px;
+          color: #333;
+        }
+  
+        .description {
+          color: #666;
+          margin-bottom: 20px;
+        }
+  
+        .pill-options {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 20px;
+  
+          .pill-count {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+  
+            &.active {
+              background-color: #007bff;
+              color: white;
+            }
+          }
+        }
+  
+        .overview-info {
+          display: flex;
+          align-items: center;
+          color: #666;
+  
+          .info-icon {
+            font-style: normal;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #666;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 5px;
+            font-size: 0.8em;
+          }
+        }
+      }
+  
+      .product-image {
+        text-align: center;
+  
+        img {
+          max-width: 100%;
+          border-radius: 15px;
+          height: 400px;
+        }
+      }
+    }
+  
+    footer {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .partnership-text {
+        color: #666;
+        font-size: 0.8em;
+        width: 40%;
+      }
+  
+      .price-actions {
+        display: flex;
+        align-items: center;
+  
+        .price {
+          font-size: 2em;
+          margin-right: 20px;
+          color: #333;
+        }
+  
+        .quantity-selector {
+          display: flex;
+          align-items: center;
+          background-color: #f0f0f0;
+          border-radius: 5px;
+          overflow: hidden;
+          margin-right: 20px;
+  
+          .quantity-button,
+          .quantity-input {
+            background: none;
+            color: #333;
+            border: none;
+            padding: 10px;
+            font-size: 1em;
+            width: 40px;
+            text-align: center;
+            cursor: pointer;
+          }
+  
+          .quantity-input {
+            width: 20px;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            appearance: textfield;
+  
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+          }
+        }
+  
+        .buy-now-button {
+          background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1em;
+  
+          &:hover {
+            background: #0056b3;
+          }
+        }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      width: 95%;
+      padding: 5%;
+      display: flex;
+      flex-direction: column;
+  
+      main {
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column-reverse;
+      }
+  
+      .product-info {
+        padding-left: 30px;
+        padding-bottom: 20px;
+        width: 100%;
+      }
+  
+      .price-actions {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+      }
+  
+      .price {
+        margin-right: 10px;
+      }
+  
+      .product-image img {
+        height: auto;
+      }
+  
+      footer {
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+  
+        p {
+          width: 100%;
+          margin-bottom: 50px;
+        }
+      }
+    }
+  }
