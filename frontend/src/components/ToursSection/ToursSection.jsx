@@ -1,6 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import './ToursSection.scss';
 
+const TourHero = ({ offer, onBulletClick, currentIndex, secondsLeft, totalOffers }) => (
+  <div className="tours-hero">
+    <div className="tours-info">
+      <p className="tours-hero-subtitle">{offer.subtitle}</p>
+      <h3>{offer.title}</h3>
+      <p className="tours-desc">{offer.desc}</p>
+      <div className="tours-price">
+        <span className="tours-new-price">{offer.price}</span>
+        <span className="tours-price-unit">/ nuit</span>
+      </div>
+      <a href={offer.link} className="tours-btn" target="_blank" rel="noopener noreferrer">
+        Découvrir
+      </a>
+    </div>
+    <div className="tours-image">
+      <img src={offer.image} alt={offer.title} className="tours-image-slide" />
+      <div className="tours-bullets">
+        {Array(totalOffers)
+          .fill(null)
+          .map((_, index) => (
+            <span
+              key={index}
+              className={`tours-bullet ${index === currentIndex ? 'active' : ''}`}
+              onClick={() => onBulletClick(index)}
+            />
+          ))}
+      </div>
+      <div className="tours-timer">
+        <span>{secondsLeft}s</span>
+      </div>
+    </div>
+  </div>
+);
+
+const TourOfferCard = ({ offer }) => (
+  <a href={offer.link} className="tours-offer" target="_blank" rel="noopener noreferrer">
+    <img src={offer.image} alt={offer.title} className="tours-offer-image" />
+    <div className="tours-offer-content">
+      <h5>{offer.title}</h5>
+      <span className="tours-offer-price">{offer.price}</span>
+    </div>
+  </a>
+);
+
 const ToursSection = () => {
   const offers = [
     {
@@ -45,60 +89,26 @@ const ToursSection = () => {
     return () => clearInterval(interval);
   }, [offers.length]);
 
-  const currentOffer = offers[currentIndex];
+  const handleBulletClick = (index) => {
+    setCurrentIndex(index);
+    setSecondsLeft(5);
+  };
 
   return (
     <section className="tours-section">
       <div className="tours-container">
         <p className="tours-subtitle">À découvrir</p>
         <h2 className="tours-title">Les Meilleurs Logements</h2>
-        <div className="tours-hero">
-          <div className="tours-info">
-            <p className="tours-hero-subtitle">{currentOffer.subtitle}</p>
-            <h3>{currentOffer.title}</h3>
-            <p className="tours-desc">{currentOffer.desc}</p>
-            <div className="tours-price">
-              <span className="tours-new-price">{currentOffer.price}</span>
-              <span className="tours-price-unit">/ nuit</span>
-            </div>
-            <a href={currentOffer.link} className="tours-btn" target="_blank" rel="noopener noreferrer">
-              Découvrir
-            </a>
-          </div>
-          <div className="tours-image">
-            <img src={currentOffer.image} alt={currentOffer.title} className="tours-image-slide" />
-            <div className="tours-bullets">
-              {offers.map((_, index) => (
-                <span
-                  key={index}
-                  className={`tours-bullet ${index === currentIndex ? 'active' : ''}`}
-                  onClick={() => {
-                    setCurrentIndex(index);
-                    setSecondsLeft(5);
-                  }}
-                ></span>
-              ))}
-            </div>
-            <div className="tours-timer">
-              <span>{secondsLeft}s</span>
-            </div>
-          </div>
-        </div>
+        <TourHero
+          offer={offers[currentIndex]}
+          onBulletClick={handleBulletClick}
+          currentIndex={currentIndex}
+          secondsLeft={secondsLeft}
+          totalOffers={offers.length}
+        />
         <div className="tours-offers">
           {offers.map((offer, index) => (
-            <a
-              key={index}
-              href={offer.link}
-              className="tours-offer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={offer.image} alt={offer.title} className="tours-offer-image" />
-              <div className="tours-offer-content">
-                <h5>{offer.title}</h5>
-                <span className="tours-offer-price">{offer.price}</span>
-              </div>
-            </a>
+            <TourOfferCard key={index} offer={offer} />
           ))}
         </div>
       </div>

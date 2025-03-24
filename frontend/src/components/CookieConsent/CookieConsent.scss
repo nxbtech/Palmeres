@@ -1,32 +1,58 @@
+// Import des styles globaux pour réutiliser les variables et mixins
+@import '../../App.scss';
+
 .cookie-consent {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-  
-    p {
-      margin: 0 0 10px;
-      font-size: 0.9rem;
-    }
-  
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-  
-      &:hover {
-        background: #0056b3;
-      }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgb(63, 61, 58); // #555 de Boutique au lieu de #333
+  color: $white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 -2px 10px $shadow-light; // Ombre légère comme dans Boutique
+  z-index: 1000;
+
+  p {
+    margin: 0 0 10px;
+    font-size: 0.875rem; // Aligné avec les paragraphes globaux
+    font-family: 'Poppins', sans-serif;
+    color: $white;
+  }
+
+  .cookie-btn {
+    display: inline-block;
+    background: $primary-color; // #ff523b de Boutique au lieu de #007bff
+    color: $white;
+    border: none;
+    padding: 8px 20px; // Aligné avec les boutons de Boutique
+    border-radius: 30px; // Arrondi prononcé comme dans Boutique
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    @include transition(background, transform);
+
+    &:hover {
+      background: darken($primary-color, 20%); // Assombrissement comme dans Boutique
+      transform: scale(1.05); // Effet de zoom comme dans Boutique
     }
   }
+}
+
+// Responsive
+@media only screen and (max-width: 600px) {
+  .cookie-consent {
+    padding: 15px;
+
+    p {
+      font-size: 0.75rem;
+    }
+
+    .cookie-btn {
+      padding: 6px 15px;
+      font-size: 0.75rem;
+    }
+  }
+}

@@ -31,58 +31,90 @@ const Guides = () => {
     navigate(`/guide/${id}`);
   };
 
-  const fashionDreamsImages = [
+  // Sélectionner les 4 premiers guides pour la section "Guides en Vedette"
+  const featuredGuides = guides.slice(0, 4);
+
+  const featuredImages = [
     'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1618245318763-a15156d6b28c?q=80&w=1887&auto=format&fit=crop',
   ];
 
   return (
-    <PageLayout>
-      <section className="guides-fashion-dreams">
-        <div className="fashion-dreams-content">
-          <h2>EXPLOREZ PLATJA D’ARO</h2>
-          <p>Découvrez les meilleurs guides pour profiter pleinement de votre expérience à Platja d’Aro</p>
-          <button className="learn-more-btn">En savoir plus <span className="arrow">→</span></button>
-        </div>
-        <div className="fashion-dreams-images">
-          <div className="fashion-card">
-            <img src={fashionDreamsImages[0]} alt="Plage Platja d’Aro" />
-          </div>
-          <div className="fashion-card">
-            <img src={fashionDreamsImages[1]} alt="Café Platja d’Aro" />
-          </div>
-        </div>
-      </section>
-
-      <section className="guides-section">
-        <h2 className="section-title">NOS GUIDES</h2>
-        {loading && <p>Chargement...</p>}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {!loading && !error && guides.length === 0 && <p>Aucun guide disponible.</p>}
-        <div className="guides-container">
-          {guides.map((guide) => (
-            <div key={guide._id} className="guide-card" onClick={() => handleCardClick(guide._id)}>
-              <div className="guide-image-wrapper">
-                <img src={guide.image} alt={guide.name} />
-                <div className="guide-overlay">
-                  <div className="guide-text">
-                    <h5>{guide.name}</h5>
-                    <p>{guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}</p>
-                  </div>
-                  <a href={guide.link} className="learn-more-btn">Télécharger <span className="arrow">→</span></a>
-                </div>
+    <PageLayout
+      title="Nos Guides"
+      subtitle="Explorez Platja d’Aro"
+      image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop"
+    >
+      {/* Featured Categories */}
+      <div className="guides-categories">
+        <div className="guides-small-container">
+          <div className="guides-row">
+            {featuredImages.map((img, index) => (
+              <div key={index} className="guides-col-3">
+                <img src={img} alt={`Guide ${index + 1}`} />
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Guides */}
+      <div className="guides-small-container">
+        <h2 className="guides-title">Guides en Vedette</h2>
+        <div className="guides-row">
+          {loading && <p>Chargement...</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {!loading && !error && featuredGuides.length === 0 && <p>Aucun guide disponible.</p>}
+          {featuredGuides.map((guide) => (
+            <div key={guide._id} className="guides-col-4" onClick={() => handleCardClick(guide._id)}>
+              <img src={guide.image} alt={guide.name} />
+              <h4>{guide.name || 'Guide par défaut'}</h4>
+              <p>{guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}</p>
+              <a href={guide.link} className="guides-btn">Télécharger →</a>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
-      <section className="guides-sale">
-        <div className="sale-image-wrapper">
-          <img src={guides[0]?.image || 'https://via.placeholder.com/600x300'} alt="Sale" />
-          <h2 className="sale-title">PROMO DE FIN DE SAISON JUSQU’À 20% DE RÉDUCTION</h2>
+      {/* All Guides */}
+      <div className="guides-small-container">
+        <h2 className="guides-title">Tous Nos Guides</h2>
+        <div className="guides-row">
+          {loading && <p>Chargement...</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {!loading && !error && guides.length === 0 && <p>Aucun guide disponible.</p>}
+          {guides.map((guide) => (
+            <div key={guide._id} className="guides-col-4" onClick={() => handleCardClick(guide._id)}>
+              <img src={guide.image} alt={guide.name} />
+              <h4>{guide.name || 'Guide par défaut'}</h4>
+              <p>{guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}</p>
+              <a href={guide.link} className="guides-btn">Télécharger →</a>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+
+      {/* Offer Section */}
+      <div className="guides-offer">
+        <div className="guides-small-container">
+          <div className="guides-row">
+            <div className="guides-col-2">
+              <img
+                src={guides[0]?.image || 'https://via.placeholder.com/600x300'}
+                className="guides-offer-img"
+                alt="Offre Exclusive"
+              />
+            </div>
+            <div className="guides-col-2">
+              <p>Exclusivement à Platja d'Aro</p>
+              <h1>Promo de Fin de Saison</h1>
+              <small>Jusqu’à 20% de réduction sur une sélection de guides et services.</small>
+              <a href="#guides" className="guides-btn">Découvrir Maintenant →</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </PageLayout>
   );
 };

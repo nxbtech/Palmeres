@@ -14,7 +14,7 @@ const CoupDeCoeur = () => {
     setLoading(true);
     fetch(`http://localhost:5000/api/coup-de-coeur?category=${activeCategory}`)
       .then((res) => {
-        if (!res.ok) throw new Error('Erreur lors du chargement des items');
+        if (!res.ok) throw new Error('Erreur lors du chargement des coups de cœur');
         return res.json();
       })
       .then((data) => {
@@ -34,31 +34,55 @@ const CoupDeCoeur = () => {
 
   const categories = ['restaurant', 'hotel', 'agence-immo', 'artisans'];
 
-  const fashionDreamsImages = [
+  const featuredImages = [
     'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1618245318763-a15156d6b28c?q=80&w=1887&auto=format&fit=crop',
   ];
 
-  return (
-    <PageLayout>
-      <section className="coup-de-coeur-fashion-dreams">
-        <div className="fashion-dreams-content">
-          <h2>DÉCOUVREZ VOS FAVORIS</h2>
-          <p>Explorez les meilleures recommandations pour enrichir votre expérience à Platja d’Aro</p>
-          <button className="learn-more-btn">En savoir plus <span className="arrow">→</span></button>
-        </div>
-        <div className="fashion-dreams-images">
-          <div className="fashion-card">
-            <img src={fashionDreamsImages[0]} alt="Plage Platja d’Aro" />
-          </div>
-          <div className="fashion-card">
-            <img src={fashionDreamsImages[1]} alt="Café Platja d’Aro" />
-          </div>
-        </div>
-      </section>
+  // Sélectionner les 4 premiers éléments pour les "Coups de Cœur en Vedette"
+  const featuredItems = items.slice(0, 4);
 
-      <section className="coup-de-coeur-section">
-        <h2 className="section-title">NOS COUPS DE CŒUR</h2>
+  return (
+    <PageLayout
+      title="Nos Coups de Cœur"
+      subtitle="Découvrez nos recommandations"
+      image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop"
+    >
+      {/* Featured Categories */}
+      <div className="coup-de-coeur-categories">
+        <div className="coup-de-coeur-small-container">
+          <div className="coup-de-coeur-row">
+            {featuredImages.map((img, index) => (
+              <div key={index} className="coup-de-coeur-col-3">
+                <img src={img} alt={`Catégorie ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Items */}
+      <div className="coup-de-coeur-small-container">
+        <h2 className="coup-de-coeur-title">Coups de Cœur en Vedette</h2>
+        <div className="coup-de-coeur-row">
+          {loading && <p>Chargement...</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {!loading && !error && featuredItems.length === 0 && <p>Aucun coup de cœur disponible.</p>}
+          {featuredItems.map((item) => (
+            <div key={item._id} className="coup-de-coeur-col-4" onClick={() => handleCardClick(item._id)}>
+              <img src={item.image} alt={item.name} />
+              <h4>{item.name || 'Nom par défaut'}</h4>
+              <p>{item.description || 'Description par défaut'}</p>
+              <button className="coup-de-coeur-btn">En savoir plus →</button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Category Tabs and Items */}
+      <div className="coup-de-coeur-small-container">
+        <h2 className="coup-de-coeur-title">Nos Coups de Cœur par Catégorie</h2>
         <div className="category-tabs">
           {categories.map((category) => (
             <button
@@ -70,35 +94,41 @@ const CoupDeCoeur = () => {
             </button>
           ))}
         </div>
-        <div className="content">
+        <div className="coup-de-coeur-row">
           {loading && <p>Chargement...</p>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {!loading && !error && items.length === 0 && <p>Aucun item disponible pour cette catégorie.</p>}
-          <div className="coup-de-coeur-container">
-            {items.map((item) => (
-              <div key={item._id} className="coup-de-coeur-card" onClick={() => handleCardClick(item._id)}>
-                <div className="coup-de-coeur-image-wrapper">
-                  <img src={item.image} alt={item.name} />
-                  <div className="coup-de-coeur-overlay">
-                    <div className="coup-de-coeur-text">
-                      <h5>{item.name}</h5>
-                      <p>{item.description}</p>
-                    </div>
-                    <button className="learn-more-btn">En savoir plus <span className="arrow">→</span></button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {items.map((item) => (
+            <div key={item._id} className="coup-de-coeur-col-4" onClick={() => handleCardClick(item._id)}>
+              <img src={item.image} alt={item.name} />
+              <h4>{item.name || 'Nom par défaut'}</h4>
+              <p>{item.description || 'Description par défaut'}</p>
+              <button className="coup-de-coeur-btn">En savoir plus →</button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Offer Section */}
+      <div className="coup-de-coeur-offer">
+        <div className="coup-de-coeur-small-container">
+          <div className="coup-de-coeur-row">
+            <div className="coup-de-coeur-col-2">
+              <img
+                src={items[0]?.image || 'https://via.placeholder.com/600x300'}
+                className="coup-de-coeur-offer-img"
+                alt="Offre Exclusive"
+              />
+            </div>
+            <div className="coup-de-coeur-col-2">
+              <p>Exclusivement à Platja d'Aro</p>
+              <h1>Promo de Fin de Saison</h1>
+              <small>Jusqu’à 20% de réduction sur une sélection d’articles et services.</small>
+              <a href="#items" className="coup-de-coeur-btn">Découvrir Maintenant →</a>
+            </div>
           </div>
         </div>
-      </section>
-
-      <section className="coup-de-coeur-sale">
-        <div className="sale-image-wrapper">
-          <img src={items[0]?.image || 'https://via.placeholder.com/600x300'} alt="Sale" />
-          <h2 className="sale-title">PROMO DE FIN DE SAISON JUSQU’À 20% DE RÉDUCTION</h2>
-        </div>
-      </section>
+      </div>
     </PageLayout>
   );
 };

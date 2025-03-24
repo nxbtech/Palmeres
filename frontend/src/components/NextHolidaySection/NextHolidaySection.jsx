@@ -4,9 +4,9 @@ import './NextHolidaySection.scss';
 const NextHolidaySection = () => {
   return (
     <section className="holiday-section">
-      <div className="holiday-container">
+      <div className="holiday-small-container">
         <div className="holiday-content">
-          <h4>Rejoignez Notre Forum</h4>
+          <h2 className="holiday-title">Rejoignez Notre Forum</h2>
           <a href="/forum" className="holiday-btn">Participer</a>
         </div>
       </div>

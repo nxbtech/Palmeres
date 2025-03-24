@@ -5,7 +5,6 @@ import PageLayout from '../components/PageLayout/PageLayout';
 import './Boutique.scss';
 
 const Boutique = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,10 +13,7 @@ const Boutique = () => {
 
   useEffect(() => {
     setLoading(true);
-    const url = activeCategory === 'all' 
-      ? 'http://localhost:5000/api/products' 
-      : `http://localhost:5000/api/products?category=${activeCategory}`;
-    fetch(url)
+    fetch('http://localhost:5000/api/products')
       .then((res) => {
         if (!res.ok) throw new Error('Erreur lors du chargement des produits');
         return res.json();
@@ -31,110 +27,196 @@ const Boutique = () => {
         setProducts([]);
       })
       .finally(() => setLoading(false));
-  }, [activeCategory]);
+  }, []);
 
   const handleCardClick = (id) => {
     navigate(`/product/${id}`);
   };
 
-  const categories = ['all', 'tshirts', 'casquettes', 'hotels', 'villas', 'sacs', 'serviettes', 'accessoires'];
-
-  const fashionDreamsImages = [
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop',
-  ];
+  // Sélectionner les 8 premiers produits pour Featured et Latest Products
+  const featuredProducts = products.slice(0, 4);
+  const latestProducts = products.slice(4, 12); // Prend jusqu'à 8 produits au total
 
   return (
-    <PageLayout>
-      <section className="boutique-upgrade">
-        <marquee>
-          <h2>AMÉLIOREZ VOTRE STYLE <span className="star">★</span> AMÉLIOREZ VOTRE STYLE</h2>
-        </marquee>
-      </section>
-
-      <section className="boutique-fashion-dreams">
-        <div className="fashion-dreams-content">
-          <h2>RÊVES DE MODE EN RÉALITÉ</h2>
-          <p>Révélez votre expression intérieure à travers notre collection variée de styles intemporels et de découvertes de mode uniques</p>
-          <button className="learn-more-btn">En savoir plus <span className="arrow">→</span></button>
-        </div>
-        <div className="fashion-dreams-images">
-          <div className="fashion-card">
-            <img src={fashionDreamsImages[0]} alt="Plage Platja d’Aro" />
+    <PageLayout
+      title="Lifestyle Platja d'Aro"
+      subtitle="Découvrez le"
+      image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop"
+    >
+      {/* Featured Categories */}
+      <div className="boutique-categories">
+        <div className="boutique-small-container">
+          <div className="boutique-row">
+            <div className="boutique-col-3">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" alt="Mode Platja d'Aro" />
+            </div>
+            <div className="boutique-col-3">
+              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop" alt="Accessoires Platja" />
+            </div>
+            <div className="boutique-col-3">
+              <img src="https://images.unsplash.com/photo-1618245318763-a15156d6b28c?q=80&w=1887&auto=format&fit=crop" alt="Décoration Côtière" />
+            </div>
           </div>
-          <div className="fashion-card">
-            <img src={fashionDreamsImages[1]} alt="Café Platja d’Aro" />
-          </div>
         </div>
-      </section>
+      </div>
 
-      <section className="boutique-section">
-        <h2 className="section-title">NOS NOUVEAUX PRODUITS</h2>
-        <div className="category-tabs">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`tab ${activeCategory === category ? 'active' : ''}`}
-              onClick={() => setActiveCategory(category)}
-            >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </button>
-          ))}
-        </div>
-        <div className="content">
+      {/* Featured Products */}
+      <div className="boutique-small-container">
+        <h2 className="boutique-title">Produits en Vedette</h2>
+        <div className="boutique-row">
           {loading && <p>Chargement...</p>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          {!loading && !error && products.length === 0 && <p>Aucun produit disponible.</p>}
-          <div className="pro-container">
-            {products.map((product) => (
-              <div key={product._id} className="pro" onClick={() => handleCardClick(product._id)}>
-                <div className="pro-image-wrapper">
-                  <img src={product.image} alt={product.name} />
-                  <div className="pro-overlay">
-                    <div className="pro-text">
-                      <h5>{product.name}</h5>
-                      <p>{product.description || 'Découvrez ce produit unique pour vos aventures quotidiennes'}</p>
-                      <h4>€{product.price.toFixed(2)}</h4>
-                    </div>
-                    <button className="buy-btn" onClick={(e) => { e.stopPropagation(); addToCart(product); }}>
-                      Acheter maintenant <span className="arrow">→</span>
-                    </button>
-                  </div>
-                </div>
+          {!loading && !error && featuredProducts.length === 0 && <p>Aucun produit disponible.</p>}
+          {featuredProducts.map((product) => (
+            <div key={product._id} className="boutique-col-4">
+              <a href={`/product/${product._id}`} onClick={(e) => { e.preventDefault(); handleCardClick(product._id); }}>
+                <img src={product.image} alt={product.name} />
+              </a>
+              <h4>{product.name || 'T-Shirt Rouge Imprimé'}</h4>
+              <div className="boutique-rating">
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star-o"></i>
               </div>
-            ))}
-          </div>
+              <p>{product.price ? `$${product.price.toFixed(2)}` : '$50.00'}</p>
+            </div>
+          ))}
         </div>
-      </section>
+        <h2 className="boutique-title">Nouveaux Produits</h2>
+        <div className="boutique-row">
+          {latestProducts.slice(0, 4).map((product) => (
+            <div key={product._id} className="boutique-col-4">
+              <a href={`/product/${product._id}`} onClick={(e) => { e.preventDefault(); handleCardClick(product._id); }}>
+                <img src={product.image} alt={product.name} />
+              </a>
+              <h4>{product.name || 'T-Shirt Rouge Imprimé'}</h4>
+              <div className="boutique-rating">
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star-o"></i>
+              </div>
+              <p>{product.price ? `$${product.price.toFixed(2)}` : '$50.00'}</p>
+            </div>
+          ))}
+        </div>
+        <div className="boutique-row">
+          {latestProducts.slice(4, 8).map((product) => (
+            <div key={product._id} className="boutique-col-4">
+              <a href={`/product/${product._id}`} onClick={(e) => { e.preventDefault(); handleCardClick(product._id); }}>
+                <img src={product.image} alt={product.name} />
+              </a>
+              <h4>{product.name || 'T-Shirt Rouge Imprimé'}</h4>
+              <div className="boutique-rating">
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star-o"></i>
+              </div>
+              <p>{product.price ? `$${product.price.toFixed(2)}` : '$50.00'}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      <section className="boutique-popular-seasons">
-        <h2 className="section-title">COLLECTIONS SAISONNIÈRES POPULAIRES</h2>
-        <div className="season-grid">
-          <div className="season-card">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" alt="Été" />
-            <h3>ÉTÉ</h3>
-          </div>
-          <div className="season-card">
-            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop" alt="Hiver" />
-            <h3>HIVER</h3>
-          </div>
-          <div className="season-card">
-            <img src="https://images.unsplash.com/photo-1618245318763-a15156d6b28c?q=80&w=1887&auto=format&fit=crop" alt="Hiver" />
-            <h3>HIVER</h3>
-          </div>
-          <div className="season-card">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" alt="Été" />
-            <h3>ÉTÉ</h3>
+      {/* Offer */}
+      <div className="boutique-offer">
+        <div className="boutique-small-container">
+          <div className="boutique-row">
+            <div className="boutique-col-2">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" className="boutique-offer-img" alt="Offre Exclusive" />
+            </div>
+            <div className="boutique-col-2">
+              <p>Exclusivement Disponible sur Lifestyle Platja d'Aro</p>
+              <h1>Bracelet Connecté 4</h1>
+              <small>
+                Le Mi Smart Band 4 propose un écran AMOLED couleur pleine touche 39,9 % plus grand (que le Mi Band 3) avec une luminosité ajustable, pour une clarté optimale.
+              </small>
+              <a href="#products" className="boutique-btn">Acheter Maintenant →</a>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className="boutique-sale">
-        <div className="sale-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" alt="Sale" />
-          <h2 className="sale-title">PROMO DE FIN DE SAISON JUSQU’À 20% DE RÉDUCTION</h2>
+      {/* Testimonial */}
+      <div className="boutique-testimonial">
+        <div className="boutique-small-container">
+          <div className="boutique-row">
+            <div className="boutique-col-3">
+              <i className="fa fa-quote-left"></i>
+              <p>
+                Le Lorem Ipsum est un simple texte fictif utilisé dans l'imprimerie et la typographie. C'est le texte factice standard de l'industrie.
+              </p>
+              <div className="boutique-rating">
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+              </div>
+              <img src="https://via.placeholder.com/50" alt="Sean Parker" />
+              <h3>Sean Parker</h3>
+            </div>
+            <div className="boutique-col-3">
+              <i className="fa fa-quote-left"></i>
+              <p>
+                Le Lorem Ipsum est un simple texte fictif utilisé dans l'imprimerie et la typographie. C'est le texte factice standard de l'industrie.
+              </p>
+              <div className="boutique-rating">
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+              </div>
+              <img src="https://via.placeholder.com/50" alt="Mike Smith" />
+              <h3>Mike Smith</h3>
+            </div>
+            <div className="boutique-col-3">
+              <i className="fa fa-quote-left"></i>
+              <p>
+                Le Lorem Ipsum est un simple texte fictif utilisé dans l'imprimerie et la typographie. C'est le texte factice standard de l'industrie.
+              </p>
+              <div className="boutique-rating">
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+              </div>
+              <img src="https://via.placeholder.com/50" alt="Mabel Joe" />
+              <h3>Mabel Joe</h3>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+
+      {/* Brands */}
+      <div className="boutique-brands">
+        <div className="boutique-small-container">
+          <div className="boutique-row">
+            <div className="boutique-col-5">
+              <img src="https://via.placeholder.com/160" alt="Marque 1" />
+            </div>
+            <div className="boutique-col-5">
+              <img src="https://via.placeholder.com/160" alt="Marque 2" />
+            </div>
+            <div className="boutique-col-5">
+              <img src="https://via.placeholder.com/160" alt="Marque 3" />
+            </div>
+            <div className="boutique-col-5">
+              <img src="https://via.placeholder.com/160" alt="Marque 4" />
+            </div>
+            <div className="boutique-col-5">
+              <img src="https://via.placeholder.com/160" alt="Marque 5" />
+            </div>
+          </div>
+        </div>
+      </div>
     </PageLayout>
   );
 };

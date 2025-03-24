@@ -26,8 +26,9 @@ import SuccessCancel from './pages/SuccessCancel';
 import ErrorPage from './pages/ErrorPage';
 import Cart from './pages/Cart';
 import ProductDetailPage from './pages/ProductDetailPage';
+import Profile from './pages/Profile';
 import './App.scss';
-import CookieConsent from './components/CookieConsent/CookieConsent'; // Correction de l'importation
+import CookieConsent from './components/CookieConsent/CookieConsent';
 
 const App = () => {
   const [acceptedCookies, setAcceptedCookies] = useState(localStorage.getItem('cookiesAccepted') === 'true');
@@ -39,52 +40,50 @@ const App = () => {
 
   return (
     <Router>
-      <Header />
-      <SubMenu />
-      <SubMenuTabletMobile />
-      <div className="home-container">
-        <ErrorBoundary>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <HolidaySection />
-                  <DestinationsSection />
-                  <NextHolidaySection />
-                  <ToursSection />
-                  <DiscoverSection />
-                  <PromotionSection />
-                  <Home />
-                </>
-              }
-            />
-            <Route path="/coup-de-coeur" element={<CoupDeCoeur />} />
-            <Route path="/boutique" element={<Boutique />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/reserver" element={<Reserver />} />
-            <Route path="/donate" element={<Donate />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/success" element={<SuccessCancel />} />
-            <Route path="/cancel" element={<SuccessCancel />} />
-            <Route path="/error" element={<ErrorPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/product/:id" element={<ProductDetailPage />} />
-            {!acceptedCookies && <Route path="*" element={<Navigate to="/cookie-consent" />} />}
-            <Route
-              path="/cookie-consent"
-              element={
-                <CookieConsent onAccept={handleAcceptCookies} />
-              }
-            />
-          </Routes>
-        </ErrorBoundary>
+      <div className="app-wrapper">
+        <Header />
+        <SubMenu />
+        <SubMenuTabletMobile />
+        <main className="home-container">
+          <ErrorBoundary>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <HolidaySection />
+                    <DestinationsSection />
+                    <NextHolidaySection />
+                    <ToursSection />
+                    <DiscoverSection />
+                    <PromotionSection />
+                    <Home />
+                  </>
+                }
+              />
+              <Route path="/coup-de-coeur" element={<CoupDeCoeur />} />
+              <Route path="/boutique" element={<Boutique />} />
+              <Route path="/guides" element={<Guides />} />
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/reserver" element={<Reserver />} />
+              <Route path="/donate" element={<Donate />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/success" element={<SuccessCancel />} />
+              <Route path="/cancel" element={<SuccessCancel />} />
+              <Route path="/error" element={<ErrorPage />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/product/:id" element={<ProductDetailPage />} />
+              <Route path="/profile" element={<Profile />} />
+              {!acceptedCookies && <Route path="*" element={<Navigate to="/cookie-consent" />} />}
+              <Route path="/cookie-consent" element={<CookieConsent onAccept={handleAcceptCookies} />} />
+            </Routes>
+          </ErrorBoundary>
+        </main>
+        <Footer />
       </div>
-      <Footer />
       {!acceptedCookies && <CookieConsent onAccept={handleAcceptCookies} />}
     </Router>
   );

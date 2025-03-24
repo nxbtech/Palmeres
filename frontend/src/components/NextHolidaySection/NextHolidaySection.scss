@@ -1,67 +1,112 @@
-.holiday-section {
-  padding: 4rem 0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Variables inspirées de Boutique.scss
+$primary-color: #ff523b; // Même couleur que Boutique
+$dark-color: #555;
+$white: #fff;
+$shadow-light: rgba(0, 0, 0, 0.1);
+$shadow-medium: rgba(0, 0, 0, 0.2);
+
+// Mixins pour réutilisation
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.holiday-container {
-  width: 100%;
+@mixin transition($properties...) {
+  transition: $properties 0.5s;
+}
+
+.holiday-section {
+  padding: 4rem 0;
+  background: $white;
+}
+
+.holiday-small-container {
+  max-width: 1080px; // Même largeur que Boutique
   margin: 0 auto;
-  height: 240px; // Légèrement plus haut que l'original (204px)
+  height: 240px; // Hauteur conservée
   position: relative;
   overflow: hidden;
-  background: no-repeat center / cover url(https://leloc90.github.io/loveTravel/assets/images/parallax-search-2.jpg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: no-repeat center / cover url('https://leloc90.github.io/loveTravel/assets/images/parallax-search-2.jpg');
+  border-radius: 12px; // Ajout d'un léger arrondi comme dans Boutique
+  box-shadow: 0 2px 10px $shadow-light;
+  @include transition(transform, box-shadow);
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-
-    .holiday-btn {
-      background: #ff8200;
-      color: #fff;
-    }
+    transform: translateY(-5px); // Effet de levée au survol, comme dans Boutique
+    box-shadow: 0 10px 20px $shadow-medium;
   }
 }
 
 .holiday-content {
   position: absolute;
   inset: 0;
-  display: flex;
+  @include flex-center;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background: rgba(0, 0, 0, 0.3); // Overlay sombre pour lisibilité
-  color: #fff;
+  color: $white;
   padding: 2rem;
   text-align: center;
-  transition: background 0.3s ease;
+  @include transition(background);
+
+  .holiday-small-container:hover & {
+    background: rgba(0, 0, 0, 0.5); // Plus sombre au survol, comme dans votre version
+  }
 }
 
-.holiday-container:hover .holiday-content {
-  background: rgba(0, 0, 0, 0.5); // Plus sombre au hover
-}
-
-h4 {
-  font-size: 2rem; // 32px, réduit de 46px pour un look plus équilibré
-  font-weight: 700;
+.holiday-title {
+  font-family: 'Poppins', sans-serif; // Police de Boutique
+  font-size: 2rem; // Taille conservée
+  font-weight: 600; // Légèrement moins lourd que 700
+  color: $white;
+  text-transform: uppercase;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  text-transform: uppercase;
+  position: relative;
+
+  &::after {
+    content: '';
+    background: $primary-color; // Ligne rouge comme dans Boutique
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .holiday-btn {
   display: inline-block;
-  padding: 0.75rem 2rem; // Plus compact que 20px 40px
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
+  padding: 0.75rem 2rem; // Taille conservée
+  background: $primary-color; // Couleur principale de Boutique
+  color: $white;
   text-decoration: none;
-  font-size: 1rem; // 16px, réduit de 18px
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
-  border-radius: 20px;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  border-radius: 30px; // Arrondi plus prononcé, comme dans Boutique
+  border: none;
+  @include transition(background, transform);
 
   &:hover {
-    transform: scale(1.05);
+    background: darken($primary-color, 20%); // Assombrissement au survol, comme dans Boutique
+    transform: scale(1.05); // Effet de zoom conservé
+  }
+}
+
+// Responsive
+@media only screen and (max-width: 600px) {
+  .holiday-title {
+    font-size: 1.5rem;
+  }
+
+  .holiday-btn {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.875rem;
   }
 }

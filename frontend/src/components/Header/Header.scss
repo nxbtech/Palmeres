@@ -1,3 +1,5 @@
+@import '../../App.scss';
+
 .header {
   position: fixed;
   top: 0;
@@ -46,12 +48,6 @@
 
 .nav-item {
   position: relative;
-
-  &:hover .nav-submenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
 }
 
 .nav-link {
@@ -65,75 +61,32 @@
   transition: color 0.3s ease;
 
   &:hover {
-    color: #ff8200;
-  }
-}
-
-.nav-btn {
-  text-decoration: none;
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 0.5rem 1.5rem;
-  background: #ff8200;
-  border-radius: 20px;
-  transition: background 0.3s ease, transform 0.2s ease;
-
-  &:hover {
-    background: #e67500;
-    transform: scale(1.05);
-  }
-}
-
-.nav-submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  width: 180px;
-  list-style: none;
-  padding: 0.5rem 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.submenu-item {
-  padding: 0.5rem 1rem;
-
-  &:hover {
-    background: rgba(255, 130, 0, 0.1);
-  }
-}
-
-.submenu-link {
-  text-decoration: none;
-  color: #333;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  display: block;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #ff8200;
+    color: $primary-color; // Remplace #ff8200 par la variable globale
   }
 }
 
 .nav-icon {
   position: relative;
 
-  .nav-icon-link {
+  .nav-icon-link,
+  .nav-icon-btn {
     color: #fff;
     font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
     transition: color 0.3s ease;
 
     &:hover {
-      color: #ff8200;
+      color: $primary-color;
+    }
+  }
+
+  .nav-icon-btn.logout-btn {
+    color: $medium-gray;
+
+    &:hover {
+      color: darken($medium-gray, 10%);
     }
   }
 
@@ -141,7 +94,7 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background: #ff8200;
+    background: $primary-color;
     color: #fff;
     border-radius: 50%;
     padding: 2px 6px;
@@ -152,7 +105,7 @@
 
 .header-menu-toggle {
   display: none;
-  color: #ff8200;
+  color: $primary-color;
   font-size: 2rem;
   cursor: pointer;
   padding: 0.5rem;

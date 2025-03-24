@@ -1,38 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import platja1 from '../../assets/images/platja1.jpg';
+import platja2 from '../../assets/images/platja2.jpg';
+import platja3 from '../../assets/images/platja3.jpg';
+import platja4 from '../../assets/images/platja4.jpg';
+import platja5 from '../../assets/images/platja5.jpg';
 import './HolidaySection.scss';
 
 const HolidaySection = () => {
-  console.log('HolidaySection rendu');
+  const slides = [
+    { title: "Plage ensoleillée", subtitle: "Détendez-vous", image: platja1 },
+    { title: "Soirée vibrante", subtitle: "Profitez", image: platja2 },
+    { title: "Nature sauvage", subtitle: "Découvrez", image: platja3 },
+    { title: "Vue imprenable", subtitle: "Admirez", image: platja4 },
+    { title: "Aventure côtière", subtitle: "Explorez", image: platja5 },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 5000); // Change toutes les 5 secondes
+    return () => clearInterval(interval); // Nettoie l'intervalle à la fin
+  }, [slides.length]);
 
   return (
-    <section className="hero-section">
-      <div className="hero-container">
-        <h1 className="hero-title">PLATJA D’ARO</h1>
-        <p className="hero-subtitle">... pas si loin</p>
-        <div className="hero-info">
-
-          <div className="social-links">
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-              <i className="bx bxl-youtube"></i>
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <i className="bx bxl-facebook"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <i className="bx bxl-instagram"></i>
-            </a>
-          </div>
-        </div>
-        {/* Widget météo amélioré */}
-        <div className="weather-widget">
-          <div className="weather-icon">☀️</div>
-          <div className="weather-details">
-            <p className="weather-temp">22°C</p>
-            <p className="weather-desc">Ensoleillé</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div className="holiday-page-wrap">
+      <header className="holiday-page-header">
+        <section className="holiday-main">
+          {slides.map((slide, index) => (
+            <article
+              key={index}
+              className={`holiday-slide ${index === currentIndex ? 'active' : ''}`}
+              style={{ '--i': index }}
+            >
+              <div
+                className="holiday-hero-image"
+                style={{ backgroundImage: `url(${slide.image})` }}
+              />
+              <div className="holiday-hero-info">
+                <h2>{slide.subtitle}</h2>
+                <h1>{slide.title}</h1>
+                <h3>Platja d’Aro - Costa Brava</h3>
+              </div>
+            </article>
+          ))}
+        </section>
+      </header>
+    </div>
   );
 };
 
