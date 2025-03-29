@@ -1,23 +1,25 @@
 // Import des polices
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Futura:wght@700&display=swap'); // Remplace Montserrat par Futura
 
-// Variables Sass (définies pour Sass, pas seulement CSS)
-$primary-color: #ff523b; // Défini comme variable Sass
-$primary-text-color: #555;
-$primary-text-color-2: #333;
-$medium-gray: #777;
-$light-gray: #9a9a9a;
+// Variables Sass
+$primary-color: #ff1e00; // Rouge Nike moderne
+$secondary-color: #1a1a1a; // Noir mat pour un look audacieux
+$accent-color: #fff; // Blanc éclatant pour contraste
+$primary-text-color: #333;
+$medium-gray: #666;
+$light-gray: #999;
 $white: #fff;
 $shadow-light: rgba(0, 0, 0, 0.1);
-$shadow-medium: rgba(0, 0, 0, 0.2);
-$dark-color: #555; // Ajoutez ceci si absent
+$shadow-medium: rgba(0, 0, 0, 0.15);
 
 // Export vers :root pour compatibilité CSS
 :root {
   --primary-color: #{$primary-color};
+  --primary-text-color-2: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
   --primary-text-color: #{$primary-text-color};
-  --primary-text-color-2: #{$primary-text-color-2};
   --medium-gray: #{$medium-gray};
   --light-gray: #{$light-gray};
   --white: #{$white};
@@ -33,7 +35,7 @@ $dark-color: #555; // Ajoutez ceci si absent
 }
 
 @mixin transition($properties...) {
-  transition: $properties 0.5s;
+  transition: $properties 0.3s ease-out; // Plus rapide et fluide
 }
 
 // Réinitialisation globale
@@ -49,124 +51,145 @@ body {
   font-family: 'Poppins', sans-serif;
   color: $primary-text-color;
   background: $white;
+  line-height: 1.5;
 }
 
-// Titres avec Montserrat
+// Titres avec Futura (style Nike)
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Futura', sans-serif; // Police audacieuse et moderne
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3rem; // Plus grand pour un impact fort
   font-weight: 700;
-  color: $primary-color;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  color: $secondary-color;
+  margin-bottom: 2rem;
   position: relative;
 
   &::after {
     content: '';
     background: $primary-color;
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
+    width: 100px;
+    height: 6px;
+    border-radius: 3px;
     position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: -12px;
+    left: 0; // Aligné à gauche pour un look asymétrique
+    transform: none;
   }
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: $primary-text-color;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  color: $secondary-color;
+  margin-bottom: 1.75rem;
   position: relative;
 
   &::after {
     content: '';
     background: $primary-color;
     width: 80px;
-    height: 5px;
-    border-radius: 5px;
+    height: 4px;
+    border-radius: 2px;
     position: absolute;
     bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
   }
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: $primary-text-color;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 h4 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: $primary-text-color;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.45rem;
 }
 
 h5 {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 500;
   color: $primary-text-color;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 h6 {
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 500;
   color: $primary-text-color;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0;
 }
 
 // Paragraphes
 p {
-  font-size: 0.875rem;
+  font-size: 1rem; // Légèrement plus grand pour lisibilité
   color: $medium-gray;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  line-height: 1.8; // Plus d'espace pour une vibe décontractée
+  margin-bottom: 1.25rem;
 }
 
 // Liens
 a {
   color: $primary-color;
   text-decoration: none;
-  font-size: 0.875rem;
-  @include transition(opacity, text-decoration);
+  font-size: 1rem;
+  font-weight: 500;
+  @include transition(color);
 
   &:hover {
-    opacity: 0.85;
-    text-decoration: underline;
+    color: darken($primary-color, 10%);
+    text-decoration: none; // Pas de soulignement, style Nike
   }
 }
 
-// Boutons génériques
+// Boutons génériques (style Nike)
 button, .pri-btn {
-  padding: 8px 15px;
+  padding: 12px 30px; // Plus large pour un look audacieux
   display: inline-block;
-  background: $primary-color;
-  color: $white;
-  border: none;
-  border-radius: 30px;
+  background: $secondary-color; // Noir mat par défaut
+  color: $accent-color;
+  border: 2px solid $secondary-color; // Bordure nette
+  border-radius: 0; // Pas de coins arrondis, style brut
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-decoration: none;
+  letter-spacing: 1.5px;
   cursor: pointer;
-  @include transition(background, transform);
+  @include transition(background, color, transform);
 
   &:hover {
-    background: darken($primary-color, 20%);
-    transform: scale(1.05);
+    background: $primary-color; // Rouge au survol
+    color: $white;
+    transform: translateY(-2px); // Léger décalage vertical
+  }
+}
+
+// Variante de bouton secondaire
+.sec-btn {
+  background: transparent;
+  color: $secondary-color;
+  border: 2px solid $secondary-color;
+  padding: 12px 30px;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  @include transition(background, color);
+
+  &:hover {
+    background: $secondary-color;
+    color: $accent-color;
   }
 }
 
@@ -175,6 +198,7 @@ button, .pri-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px; // Espacement moderne
 }
 
 .sub-title__text {
@@ -182,13 +206,15 @@ button, .pri-btn {
   letter-spacing: 2px;
   font-size: 0.875rem;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .title__text {
-  color: $primary-text-color;
-  font-size: 2.5rem;
-  font-family: 'Montserrat', sans-serif;
+  color: $secondary-color;
+  font-size: 2.75rem;
+  font-family: 'Futura', sans-serif;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .--title__text-underline {
@@ -196,43 +222,75 @@ button, .pri-btn {
 
   &:after {
     content: '';
-    display: block;
-    opacity: 0.7;
-    height: 4px;
+    height: 5px;
     position: absolute;
-    right: 0;
-    bottom: 10px;
-    border-radius: 24%;
-    width: 100%;
+    left: 0;
+    bottom: -8px;
+    width: 60px; // Plus court pour un look minimaliste
     background: $primary-color;
   }
 }
 
 // Conteneur de page
 .page-container {
-  width: 80%;
-  max-width: 1200px;
-  margin: 120px auto 60px;
-  padding: 20px;
+  width: 90%; // Plus large pour un design aéré
+  max-width: 1400px; // Plus grand que 1200px pour un look moderne
+  margin: 40px auto; // Réduit de 100px/80px à 40px haut/bas
+  padding: 30px;
   text-align: center;
 
   h1 {
-    font-size: 2.25rem;
-    color: $primary-color;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: $secondary-color;
+    margin-bottom: 25px;
   }
 
   p {
     font-size: 1.125rem;
-    color: $primary-text-color;
-    margin-bottom: 20px;
+    color: $medium-gray;
+    margin-bottom: 25px;
   }
 }
 
 // Responsive
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
+  .page-container {
+    width: 95%;
+    margin: 80px auto 60px;
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   h1 {
     font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+  p {
+    font-size: 0.875rem;
+  }
+  button, .pri-btn, .sec-btn {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+  }
+  .page-container {
+    width: 90%;
+    margin: 60px auto 40px;
+    padding: 15px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.75rem;
   }
   h2 {
     font-size: 1.5rem;
@@ -240,15 +298,7 @@ button, .pri-btn {
   h3 {
     font-size: 1.25rem;
   }
-  h4 {
-    font-size: 1rem;
-  }
-  p {
-    font-size: 0.75rem;
-  }
-  .page-container {
-    width: 90%;
-    margin: 80px auto 40px;
-    padding: 15px;
+  .title__text {
+    font-size: 2rem;
   }
 }

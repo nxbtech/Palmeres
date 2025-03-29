@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import './DestinationsSection.scss';
 
 const DestinationsSection = () => {
@@ -40,14 +42,21 @@ const DestinationsSection = () => {
               <img src={event.image} alt={event.name} className="event-image" />
               <div className="event-info">
                 <h3>{event.name}</h3>
-                <p>{event.date}</p>
+                <p>
+                  {format(new Date(event.date), 'd MMMM yyyy', { locale: fr })}
+                </p>
               </div>
               <div className="event-overlay">
                 <p>{event.description || 'Détails de l’événement à venir.'}</p>
-                <a href="/contact" className="event-btn">Nous contacter</a>
               </div>
             </div>
           ))}
+        </div>
+        <div className="events-more">
+          <a href="/calendar" className="events-more-link">
+            En savoir plus
+            <i className="fas fa-arrow-right events-more-icon"></i>
+          </a>
         </div>
       </div>
     </section>

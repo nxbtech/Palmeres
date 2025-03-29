@@ -6,8 +6,10 @@ import './Boutique.scss';
 
 const Boutique = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState({ price: 'all', category: 'all', isNew: false });
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
@@ -20,203 +22,304 @@ const Boutique = () => {
       })
       .then((data) => {
         setProducts(data);
+        setFilteredProducts(data);
         setError(null);
       })
       .catch((err) => {
         setError(err.message);
         setProducts([]);
+        setFilteredProducts([]);
       })
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    let result = [...products];
+    if (filter.price !== 'all') {
+      if (filter.price === 'low') result = result.filter(p => p.price < 50);
+      else if (filter.price === 'medium') result = result.filter(p => p.price >= 50 && p.price <= 100);
+      else if (filter.price === 'high') result = result.filter(p => p.price > 100);
+    }
+    if (filter.category !== 'all') {
+      result = result.filter(p => p.category === filter.category);
+    }
+    if (filter.isNew) {
+      result = result.filter(p => p.isNew);
+    }
+    setFilteredProducts(result);
+  }, [filter, products]);
 
   const handleCardClick = (id) => {
     navigate(`/product/${id}`);
   };
 
-  // Sélectionner les 8 premiers produits pour Featured et Latest Products
-  const featuredProducts = products.slice(0, 4);
-  const latestProducts = products.slice(4, 12); // Prend jusqu'à 8 produits au total
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    alert(`${product.name} ajouté au panier !`);
+  };
+
+  const handleFilterChange = (key, value) => {
+    setFilter(prev => ({ ...prev, [key]: value }));
+  };
+
+  const spotlightProduct = products[0];
+  const curatedProducts = products.slice(1, 6);
+  const trendingProducts = products.slice(6, 11);
+  const newArrivals = products.slice(11, 15);
 
   return (
     <PageLayout
       title="Lifestyle Platja d'Aro"
-      subtitle="Découvrez le"
-      image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop"
+      subtitle="Redéfinissez votre style avec nous"
+      image="https://res.cloudinary.com/drnmfxkwv/image/upload/v1742936595/boutique-banniere_reri5b.jpg"
     >
-      {/* Featured Categories */}
-      <div className="boutique-categories">
-        <div className="boutique-small-container">
-          <div className="boutique-row">
-            <div className="boutique-col-3">
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" alt="Mode Platja d'Aro" />
-            </div>
-            <div className="boutique-col-3">
-              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop" alt="Accessoires Platja" />
-            </div>
-            <div className="boutique-col-3">
-              <img src="https://images.unsplash.com/photo-1618245318763-a15156d6b28c?q=80&w=1887&auto=format&fit=crop" alt="Décoration Côtière" />
+      {/* Loader */}
+      {loading && (
+        <div className="boutique-loader">
+          <div className="loader-circle"></div>
+          <p>Préparation de votre expérience...</p>
+        </div>
+      )}
+
+      {/* Spotlight Section */}
+      {!loading && products.length > 0 && (
+        <section className="boutique-spotlight">
+          <div className="boutique-container">
+            <h2 className="section-title">Produit Star</h2>
+            <div className="spotlight-card">
+              <div className="card-image" onClick={() => handleCardClick(spotlightProduct._id)}>
+                <img src={spotlightProduct.image} alt={spotlightProduct.name} />
+              </div>
+              <div className="card-content">
+                <h3>{spotlightProduct.name}</h3>
+                <p className="price">{`$${spotlightProduct.price.toFixed(2)}`}</p>
+                <p className="description">L'élégance rencontre l'innovation dans ce produit exclusif.</p>
+                <div className="rating">
+                  {[...Array(5)].map((_, i) => (
+                    <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                  ))}
+                </div>
+                <button className="pri-btn" onClick={() => handleAddToCart(spotlightProduct)}>
+                  Ajouter au Panier
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      )}
 
-      {/* Featured Products */}
-      <div className="boutique-small-container">
-        <h2 className="boutique-title">Produits en Vedette</h2>
-        <div className="boutique-row">
-          {loading && <p>Chargement...</p>}
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          {!loading && !error && featuredProducts.length === 0 && <p>Aucun produit disponible.</p>}
-          {featuredProducts.map((product) => (
-            <div key={product._id} className="boutique-col-4">
-              <a href={`/product/${product._id}`} onClick={(e) => { e.preventDefault(); handleCardClick(product._id); }}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <h4>{product.name || 'T-Shirt Rouge Imprimé'}</h4>
-              <div className="boutique-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star-o"></i>
+      {/* Curated Collection */}
+      {!loading && curatedProducts.length > 0 && (
+        <section className="boutique-curated">
+          <div className="boutique-container">
+            <h2 className="section-title">Collection Curated</h2>
+            <div className="curated-grid">
+              {curatedProducts.slice(0, 2).map((product) => (
+                <div key={product._id} className="curated-card curated-card-vertical">
+                  <div className="card-image" onClick={() => handleCardClick(product._id)}>
+                    <img src={product.image} alt={product.name} />
+                  </div>
+                  <div className="card-content">
+                    <h6>{product.name}</h6>
+                    <p className="price">{`$${product.price.toFixed(2)}`}</p>
+                    <p className="description">Un choix élégant pour votre style.</p>
+                    <div className="rating">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                      ))}
+                    </div>
+                    <button className="pri-btn" onClick={() => handleAddToCart(product)}>
+                      Ajouter
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <div className="curated-row-stack">
+                {curatedProducts.slice(2, 5).map((product) => (
+                  <div key={product._id} className="curated-card curated-card-row">
+                    <div className="card-image" onClick={() => handleCardClick(product._id)}>
+                      <img src={product.image} alt={product.name} />
+                    </div>
+                    <div className="card-content">
+                      <h6>{product.name}</h6>
+                      <p className="price">{`$${product.price.toFixed(2)}`}</p>
+                      <div className="rating">
+                        {[...Array(5)].map((_, i) => (
+                          <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                        ))}
+                      </div>
+                      <button className="pri-btn" onClick={() => handleAddToCart(product)}>
+                        <i className="fas fa-cart-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <p>{product.price ? `$${product.price.toFixed(2)}` : '$50.00'}</p>
-            </div>
-          ))}
-        </div>
-        <h2 className="boutique-title">Nouveaux Produits</h2>
-        <div className="boutique-row">
-          {latestProducts.slice(0, 4).map((product) => (
-            <div key={product._id} className="boutique-col-4">
-              <a href={`/product/${product._id}`} onClick={(e) => { e.preventDefault(); handleCardClick(product._id); }}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <h4>{product.name || 'T-Shirt Rouge Imprimé'}</h4>
-              <div className="boutique-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star-o"></i>
-              </div>
-              <p>{product.price ? `$${product.price.toFixed(2)}` : '$50.00'}</p>
-            </div>
-          ))}
-        </div>
-        <div className="boutique-row">
-          {latestProducts.slice(4, 8).map((product) => (
-            <div key={product._id} className="boutique-col-4">
-              <a href={`/product/${product._id}`} onClick={(e) => { e.preventDefault(); handleCardClick(product._id); }}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <h4>{product.name || 'T-Shirt Rouge Imprimé'}</h4>
-              <div className="boutique-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star-o"></i>
-              </div>
-              <p>{product.price ? `$${product.price.toFixed(2)}` : '$50.00'}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Offer */}
-      <div className="boutique-offer">
-        <div className="boutique-small-container">
-          <div className="boutique-row">
-            <div className="boutique-col-2">
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" className="boutique-offer-img" alt="Offre Exclusive" />
-            </div>
-            <div className="boutique-col-2">
-              <p>Exclusivement Disponible sur Lifestyle Platja d'Aro</p>
-              <h1>Bracelet Connecté 4</h1>
-              <small>
-                Le Mi Smart Band 4 propose un écran AMOLED couleur pleine touche 39,9 % plus grand (que le Mi Band 3) avec une luminosité ajustable, pour une clarté optimale.
-              </small>
-              <a href="#products" className="boutique-btn">Acheter Maintenant →</a>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      )}
 
-      {/* Testimonial */}
-      <div className="boutique-testimonial">
-        <div className="boutique-small-container">
-          <div className="boutique-row">
-            <div className="boutique-col-3">
-              <i className="fa fa-quote-left"></i>
-              <p>
-                Le Lorem Ipsum est un simple texte fictif utilisé dans l'imprimerie et la typographie. C'est le texte factice standard de l'industrie.
-              </p>
-              <div className="boutique-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
+      {/* Trending Now */}
+      {!loading && trendingProducts.length > 0 && (
+        <section className="boutique-trending">
+          <div className="boutique-container">
+            <h2 className="section-title">Tendances Actuelles</h2>
+            <div className="trending-grid">
+              {trendingProducts.slice(0, 2).map((product) => (
+                <div key={product._id} className="trending-card trending-card-vertical">
+                  <div className="card-image" onClick={() => handleCardClick(product._id)}>
+                    <img src={product.image} alt={product.name} />
+                  </div>
+                  <div className="card-content">
+                    <h6>{product.name}</h6>
+                    <p className="price">{`$${product.price.toFixed(2)}`}</p>
+                    <p className="description">Un produit en vogue cette saison.</p>
+                    <div className="rating">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                      ))}
+                    </div>
+                    <button className="pri-btn" onClick={() => handleAddToCart(product)}>
+                      Ajouter
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <div className="trending-row-stack">
+                {trendingProducts.slice(2, 5).map((product) => (
+                  <div key={product._id} className="trending-card trending-card-row">
+                    <div className="card-image" onClick={() => handleCardClick(product._id)}>
+                      <img src={product.image} alt={product.name} />
+                    </div>
+                    <div className="card-content">
+                      <h6>{product.name}</h6>
+                      <p className="price">{`$${product.price.toFixed(2)}`}</p>
+                      <div className="rating">
+                        {[...Array(5)].map((_, i) => (
+                          <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                        ))}
+                      </div>
+                      <button className="pri-btn" onClick={() => handleAddToCart(product)}>
+                        <i className="fas fa-cart-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <img src="https://via.placeholder.com/50" alt="Sean Parker" />
-              <h3>Sean Parker</h3>
-            </div>
-            <div className="boutique-col-3">
-              <i className="fa fa-quote-left"></i>
-              <p>
-                Le Lorem Ipsum est un simple texte fictif utilisé dans l'imprimerie et la typographie. C'est le texte factice standard de l'industrie.
-              </p>
-              <div className="boutique-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-              </div>
-              <img src="https://via.placeholder.com/50" alt="Mike Smith" />
-              <h3>Mike Smith</h3>
-            </div>
-            <div className="boutique-col-3">
-              <i className="fa fa-quote-left"></i>
-              <p>
-                Le Lorem Ipsum est un simple texte fictif utilisé dans l'imprimerie et la typographie. C'est le texte factice standard de l'industrie.
-              </p>
-              <div className="boutique-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-              </div>
-              <img src="https://via.placeholder.com/50" alt="Mabel Joe" />
-              <h3>Mabel Joe</h3>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      )}
 
-      {/* Brands */}
-      <div className="boutique-brands">
-        <div className="boutique-small-container">
-          <div className="boutique-row">
-            <div className="boutique-col-5">
-              <img src="https://via.placeholder.com/160" alt="Marque 1" />
+      {/* Banner Intermédiaire */}
+      {!loading && (
+        <section className="boutique-banner">
+          <div className="banner-content">
+            <h2>Offre Exclusive -50%</h2>
+            <p>Jusqu'au 15 avril, profitez de cette remise exceptionnelle !</p>
+            <button className="pri-btn">Saisir l'Offre</button>
+          </div>
+        </section>
+      )}
+
+      {/* Tous les Articles avec Filtres */}
+      {!loading && products.length > 0 && (
+        <section className="boutique-all-products">
+          <div className="boutique-container">
+            <h2 className="section-title">Tous les Articles</h2>
+            <div className="filters">
+              <div className="filter-group">
+                <label>Prix :</label>
+                <select
+                  value={filter.price}
+                  onChange={(e) => handleFilterChange('price', e.target.value)}
+                >
+                  <option value="all">Tous</option>
+                  <option value="low">Moins de 50$</option>
+                  <option value="medium">50$ - 100$</option>
+                  <option value="high">Plus de 100$</option>
+                </select>
+              </div>
+              <div className="filter-group">
+                <label>Catégorie :</label>
+                <select
+                  value={filter.category}
+                  onChange={(e) => handleFilterChange('category', e.target.value)}
+                >
+                  <option value="all">Toutes</option>
+                  <option value="vêtements">Vêtements</option>
+                  <option value="accessoires">Accessoires</option>
+                  <option value="chaussures">Chaussures</option>
+                </select>
+              </div>
+              <div className="filter-group checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={filter.isNew}
+                    onChange={(e) => handleFilterChange('isNew', e.target.checked)}
+                  />
+                  Nouveautés uniquement
+                </label>
+              </div>
             </div>
-            <div className="boutique-col-5">
-              <img src="https://via.placeholder.com/160" alt="Marque 2" />
-            </div>
-            <div className="boutique-col-5">
-              <img src="https://via.placeholder.com/160" alt="Marque 3" />
-            </div>
-            <div className="boutique-col-5">
-              <img src="https://via.placeholder.com/160" alt="Marque 4" />
-            </div>
-            <div className="boutique-col-5">
-              <img src="https://via.placeholder.com/160" alt="Marque 5" />
+            <div className="all-products-grid">
+              {filteredProducts.map((product) => (
+                <div key={product._id} className="product-card">
+                  <div className="card-image" onClick={() => handleCardClick(product._id)}>
+                    <img src={product.image} alt={product.name} />
+                  </div>
+                  <div className="card-content">
+                    <h6>{product.name}</h6>
+                    <p className="price">{`$${product.price.toFixed(2)}`}</p>
+                    <p className="description">{product.description || 'Un produit élégant.'}</p>
+                    <div className="rating">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                      ))}
+                    </div>
+                    <button className="pri-btn" onClick={() => handleAddToCart(product)}>
+                      <i className="fas fa-cart-plus"></i> {/* Icône au lieu de texte */}
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      )}
+
+      {/* New Arrivals */}
+      {!loading && newArrivals.length > 0 && (
+        <section className="boutique-new-arrivals">
+          <div className="boutique-container">
+            <h2 className="section-title">Nouveautés</h2>
+            <div className="new-arrivals-grid">
+              {newArrivals.map((product) => (
+                <div key={product._id} className="arrival-card">
+                  <div className="card-image" onClick={() => handleCardClick(product._id)}>
+                    <img src={product.image} alt={product.name} />
+                  </div>
+                  <div className="card-content">
+                    <h6>{product.name}</h6>
+                    <p className="price">{`$${product.price.toFixed(2)}`}</p>
+                    <p className="description">Fraîchement arrivé dans notre collection.</p>
+                    <div className="rating">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`fas fa-star ${i < 4 ? 'filled' : ''}`} />
+                      ))}
+                    </div>
+                    <button className="pri-btn" onClick={() => handleAddToCart(product)}>
+                      Ajouter
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </PageLayout>
   );
 };

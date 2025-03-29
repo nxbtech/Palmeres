@@ -83,9 +83,9 @@ const Cart = () => {
     <PageLayout
       title="Panier"
       subtitle="Votre sélection"
-      image="https://i.pinimg.com/564x/88/48/78/884878043ee17464c8972e66effcc716.jpg"
+      image="https://res.cloudinary.com/drnmfxkwv/image/upload/v1742937680/banniere-panier_kfphnm.jpg"
     >
-      <div className="cart-small-container cart-page">
+      <div className="cart-container cart-page">
         <table>
           <thead>
             <tr>
@@ -120,7 +120,7 @@ const Cart = () => {
                       onChange={(e) => handleQuantityChange(index, e)}
                     />
                   </td>
-                  <td>${calculateSubtotal(item)}</td>
+                  <td>€{calculateSubtotal(item)}</td>
                 </tr>
               ))
             )}
@@ -132,22 +132,22 @@ const Cart = () => {
               <tbody>
                 <tr>
                   <td>Sous-total</td>
-                  <td>${calculateTotal()}</td>
+                  <td>€{calculateTotal()}</td>
                 </tr>
                 <tr>
                   <td>Taxe</td>
-                  <td>${tax}</td>
+                  <td>€{tax}</td>
                 </tr>
                 <tr>
                   <td>Total</td>
-                  <td>${totalWithTax}</td>
+                  <td>€{totalWithTax}</td>
                 </tr>
               </tbody>
             </table>
           </div>
         )}
         <button
-          className="cart-btn"
+          className="pri-btn"
           onClick={handleCheckout}
           disabled={cart.length === 0}
         >

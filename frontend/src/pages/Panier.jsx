@@ -6,7 +6,7 @@ const Panier = () => {
     <PageLayout
       title="Panier"
       subtitle="Votre sélection"
-      image="https://i.pinimg.com/564x/88/48/78/884878043ee17464c8972e66effcc716.jpg"
+      image="https://res.cloudinary.com/drnmfxkwv/image/upload/v1742937680/banniere-panier_kfphnm.jpg"
     >
       <h1>Panier</h1>
       <p>Votre panier d’achat est vide pour l’instant.</p>

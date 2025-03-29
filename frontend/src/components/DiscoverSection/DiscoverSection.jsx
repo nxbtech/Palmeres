@@ -24,9 +24,14 @@ const DiscoverSection = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (guides.length === 0) return <p>Aucun guide disponible.</p>;
+  if (loading) return (
+    <div className="discover-loader">
+      <div className="loader-circle"></div>
+      <p>Chargement des guides...</p>
+    </div>
+  );
+  if (error) return <p className="discover-error">{error}</p>;
+  if (guides.length === 0) return <p className="discover-empty">Aucun guide disponible.</p>;
 
   return (
     <section className="discover-section">
@@ -37,9 +42,9 @@ const DiscoverSection = () => {
             className={`discover-card ${index === 0 ? '--expat' : '--tourism'}`}
           >
             <div className="discover-content">
-              <div className="discover-label">Guide</div>
+              <div className="sub-title__text">Guide</div>
               <h4>{guide.name}</h4>
-              <a href={guide.link} className="discover-btn">Découvrir</a>
+              <a href={guide.link} className="pri-btn">Découvrir</a>
             </div>
           </div>
         ))}

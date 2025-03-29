@@ -1,92 +1,201 @@
-/* Cart.scss */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import '../App.scss'; // Importe les styles globaux
 
-.cart-small-container {
-  max-width: 1080px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
+.cart-container {
+  @extend .page-container; // Réutilise les styles de page-container (90%, max-width 1400px)
 }
 
 .cart-page {
-  margin: 80px auto;
+  margin: 40px auto; // Réduit de 80px pour alignement avec page-container
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.cart-info {
-  display: flex;
-  flex-wrap: wrap;
+  background: $white; // Fond blanc comme vos sections
+  box-shadow: $shadow-light; // Ombre légère comme vos cartes
+  border-radius: 15px; // Coins arrondis
+  overflow: hidden; // Pour gérer les bordures
 }
 
 th {
   text-align: left;
-  padding: 5px;
-  color: #fff;
-  background: #ff523b;
-  font-weight: normal;
+  padding: 12px 15px; // Plus de padding pour un look moderne
+  color: $white;
+  background: $primary-color; // Rouge Nike
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 td {
-  padding: 10px 5px;
+  padding: 15px; // Aligné sur vos cartes
+  color: $primary-text-color; // Gris foncé
+  font-family: 'Poppins', sans-serif;
+}
+
+.cart-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; // Espacement comme vos flex-box
+
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover; // Comme vos images
+    border-radius: 8px; // Coins légèrement arrondis
+    box-shadow: $shadow-light;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    p {
+      font-size: 1rem; // Comme vos paragraphes
+      color: $primary-text-color;
+      margin: 0;
+    }
+
+    small {
+      font-size: 0.875rem;
+      color: $medium-gray;
+    }
+
+    a {
+      color: $primary-color; // Rouge Nike
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      @include transition(color);
+      &:hover {
+        color: darken($primary-color, 10%); // Rouge sombre au survol
+      }
+    }
+  }
 }
 
 td input {
-  width: 40px;
-  height: 30px;
+  width: 60px; // Légèrement plus large pour lisibilité
+  height: 35px;
   padding: 5px;
-}
-
-td a {
-  color: #ff523b;
-  font-size: 12px;
-}
-
-td img {
-  width: 80px;
-  height: 80px;
-  margin-right: 10px;
+  border: 1px solid $light-gray;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: $primary-text-color;
+  text-align: center;
+  @include transition(border-color);
+  &:hover,
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
 }
 
 .cart-total-price {
   display: flex;
   justify-content: flex-end;
+  margin-top: 30px;
+
+  table {
+    border-top: 4px solid $primary-color; // Rouge Nike
+    width: 100%;
+    max-width: 400px; // Conservé
+    box-shadow: none; // Pas d’ombre supplémentaire
+    border-radius: 0;
+  }
+
+  td {
+    padding: 10px 15px;
+    font-size: 1rem;
+    &:first-child {
+      font-weight: 500;
+      color: $medium-gray;
+    }
+    &:last-child {
+      text-align: right;
+      font-weight: 600;
+      color: $primary-text-color;
+    }
+  }
 }
 
-.cart-total-price table {
-  border-top: 3px solid #ff523b;
-  width: 100%;
-  max-width: 400px;
-}
-
-td:last-child {
-  text-align: right;
-}
-
-th:last-child {
-  text-align: right;
-}
-
-.cart-btn {
+.pri-btn {
   display: inline-block;
-  background: #ff523b;
-  color: white;
-  padding: 8px 30px;
-  margin: 30px 0;
-  border-radius: 30px;
-  transition: background 0.5s;
+  background: $secondary-color; // Noir mat
+  color: $accent-color; // Blanc
+  padding: 12px 30px; // Taille standard de vos boutons
+  margin: 30px 0 0 0;
+  border: 2px solid $secondary-color;
+  border-radius: 0; // Style brut
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  @include transition(background, color, transform);
+  &:hover {
+    background: $primary-color; // Rouge au survol
+    color: $white;
+    transform: translateY(-2px);
+  }
+  &:disabled {
+    background: $light-gray;
+    border-color: $light-gray;
+    color: $medium-gray;
+    cursor: not-allowed;
+    transform: none;
+  }
 }
 
-.cart-btn:hover {
-  background: #563434;
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-page {
+    margin: 20px auto; // Réduit pour mobile
+  }
+
+  table {
+    display: block;
+    overflow-x: auto; // Défilement horizontal si nécessaire
+  }
+
+  th, td {
+    padding: 10px; // Réduit légèrement
+    min-width: 120px; // Assure une largeur minimale
+  }
+
+  .cart-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  .pri-btn {
+    padding: 10px 20px; // Réduit comme vos boutons sur mobile
+    font-size: 0.75rem;
+  }
 }
 
-@media only screen and (max-width: 600px) {
-  .cart-info p {
-    display: none;
+@media (max-width: 600px) {
+  .cart-info div {
+    p {
+      font-size: 0.875rem;
+    }
+    small, a {
+      font-size: 0.75rem;
+    }
+  }
+
+  td input {
+    width: 50px;
+    height: 30px;
   }
 }

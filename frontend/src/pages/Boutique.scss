@@ -1,193 +1,502 @@
-/* Boutique.scss */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import '../App.scss';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-/* Styles généraux pour la disposition des éléments */
-.boutique-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
+.boutique-container {
+  @extend .page-container;
 }
 
-/* Styles spécifiques pour Boutique */
-.boutique-categories {
-  margin: 70px 0;
-}
-
-.boutique-col-3 {
-  flex-basis: 30%;
-  min-width: 250px;
-  margin-bottom: 30px;
-}
-
-.boutique-col-3 img {
-  width: 100%;
-  height: 300px; /* Dimension fixe pour forcer la même taille */
-  object-fit: cover; /* Pour s'assurer que l'image s'adapte sans déformation */
-}
-
-.boutique-small-container {
-  max-width: 1080px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
-}
-
-.boutique-col-4 {
-  flex-basis: 25%;
-  padding: 10px;
-  min-width: 200px;
-  margin-bottom: 50px;
-  transition: transform 0.5s;
-}
-
-.boutique-col-4 img {
-  width: 100%;
-  height: 250px; /* Dimension fixe pour les images des produits */
-  object-fit: cover;
-}
-
-.boutique-title {
-  text-align: center;
-  margin: 0 auto 80px;
-  position: relative;
-  line-height: 60px;
-  color: #555;
-}
-
-.boutique-title::after {
-  content: '';
-  background: #ff523b;
-  width: 80px;
-  height: 5px;
-  border-radius: 5px;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-h4 {
-  color: #555;
-  font-weight: normal;
-}
-
-.boutique-col-4 p {
-  font-size: 14px;
-}
-
-.boutique-rating .fa {
-  color: #ff523b;
-}
-
-.boutique-col-4:hover {
-  transform: translateY(-5px);
-}
-
-/* Offer */
-.boutique-offer {
-  background: radial-gradient(#fff, #ffd6d6);
-  margin-top: 80px;
-  padding: 30px 0;
-}
-
-.boutique-col-2 {
-  flex-basis: 50%;
-  min-width: 300px;
-}
-
-.boutique-col-2 .boutique-offer-img {
-  padding: 50px;
-  max-width: 100%;
-  height: 400px; /* Dimension fixe pour l'image de l'offre */
-  object-fit: cover;
-}
-
-small {
-  color: #555;
-}
-
-.boutique-btn {
-  display: inline-block;
-  background: #ff523b;
-  color: white;
-  padding: 8px 30px;
-  margin: 30px 0;
-  border-radius: 30px;
-  transition: background 0.5s;
-}
-
-.boutique-btn:hover {
-  background: #563434;
-}
-
-/* Testimonial */
-.boutique-testimonial {
-  margin-top: 100px;
-}
-
-.boutique-testimonial .boutique-col-3 {
-  text-align: center;
-  padding: 40px 20px;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.5s;
-}
-
-.boutique-testimonial .boutique-col-3 img {
-  width: 50px;
-  margin-top: 20px;
-  border-radius: 50%;
-}
-
-.boutique-testimonial .boutique-col-3:hover {
-  transform: translateY(-10px);
-}
-
-.fa.fa-quote-left {
-  font-size: 34px;
-  color: #ff523b;
-}
-
-.boutique-col-3 p {
-  font-size: 12px;
-  margin: 12px 0;
-  color: #777;
-}
-
-.boutique-testimonial .boutique-col-3 h3 {
-  font-weight: 600;
-  color: #555;
-  font-size: 16px;
-}
-
-/* Brands */
-.boutique-brands {
-  margin: 100px auto;
-}
-
-.boutique-col-5 {
-  width: 160px;
-}
-
-.boutique-col-5 img {
-  width: 100%;
-  cursor: pointer;
-  filter: grayscale(100%);
-}
-
-.boutique-col-5 img:hover {
-  filter: grayscale(0);
-}
-
-@media only screen and (max-width: 600px) {
-  .boutique-row {
-    text-align: center;
+/* Loader */
+.boutique-loader {
+  height: 100vh;
+  @include flex-center;
+  flex-direction: column;
+  .loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 6px solid $light-gray;
+    border-top: 6px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1.2s ease-in-out infinite;
   }
-  .boutique-col-2,
-  .boutique-col-3,
-  .boutique-col-4 {
-    flex-basis: 100%;
+  p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: $medium-gray;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Section générique */
+.boutique-section {
+  padding: 20px 0;
+}
+
+/* Carte générique (réutilisable) */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: $shadow-light;
+  @include transition(transform);
+  max-width: 600px;
+  margin: 0 auto;
+  &:hover {
+    transform: translateY(-10px);
+  }
+  .card-image {
+    cursor: pointer;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .card-content {
+    padding: 20px;
+    display: grid;
+    grid-template-areas:
+      "title price"
+      "description description"
+      "rating button";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+    align-items: center;
+    h3, h6 {
+      grid-area: title;
+      font-size: 1.2rem;
+      color: $primary-text-color;
+      text-align: left;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.4;
+      max-height: 3.36rem;
+    }
+    .price {
+      grid-area: price;
+      font-size: 1.1rem;
+      color: $primary-color;
+      font-weight: 600;
+      text-align: right;
+      margin: 0;
+    }
+    .description {
+      grid-area: description;
+      font-size: 0.9rem;
+      color: $medium-gray;
+      text-align: left;
+      margin: 0;
+    }
+    .rating {
+      grid-area: rating;
+      text-align: left;
+      margin: 0;
+      .fas.fa-star {
+        font-size: 0.9rem;
+        color: $light-gray;
+        &.filled {
+          color: $primary-color;
+        }
+      }
+    }
+    .pri-btn {
+      grid-area: button;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 2.8rem;
+  color: $primary-text-color;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  letter-spacing: 2px;
+  font-family: 'Futura', sans-serif;
+  text-transform: uppercase;
+  &::after {
+    content: '';
+    width: 80px;
+    height: 4px;
+    background: $primary-color;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Spotlight (carte verticale avec titre) */
+.boutique-spotlight {
+  @extend .boutique-section;
+  .spotlight-card {
+    @extend .card;
+    .card-image img {
+      height: 300px;
+    }
+  }
+}
+
+/* Curated Collection */
+.boutique-curated {
+  @extend .boutique-section;
+  .curated-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  .curated-row-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+  }
+  .curated-card {
+    @extend .card;
+    &.curated-card-vertical {
+      .card-image img {
+        height: 250px;
+      }
+    }
+    &.curated-card-row {
+      display: flex;
+      height: 150px;
+      .card-image {
+        width: 150px; // Réduit de 200px à 150px
+        img {
+          height: 100%;
+        }
+      }
+      .card-content {
+        padding: 10px; // Conservé pour compacité
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 4px; // Légèrement augmenté pour lisibilité
+        h3, h6 {
+          font-size: 1rem; // Remonté de 0.95rem
+          color: $primary-text-color;
+          margin: 0;
+          white-space: normal;
+          word-wrap: break-word;
+          line-height: 1.2;
+          max-height: 2.4rem; // 2 lignes x 1.2rem
+          overflow: hidden;
+          text-overflow: ellipsis;
+          align-self: flex-start;
+        }
+        .price {
+          font-size: 0.65rem; // Remonté de 0.55rem
+          color: $primary-color;
+          font-weight: 600;
+          margin: 0;
+          align-self: flex-start;
+        }
+        .rating {
+          margin: 0;
+          align-self: flex-start;
+          .fas.fa-star {
+            font-size: 0.65rem; // Remonté de 0.55rem
+            color: $light-gray;
+            &.filled {
+              color: $primary-color;
+            }
+          }
+        }
+        .pri-btn {
+          padding: 5px 10px; // Remonté de 4px 8px pour lisibilité
+          font-size: 0.7rem; // Remonté de 0.6rem
+          align-self: flex-end;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          i {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Trending Now (inspiré de Curated Collection) */
+.boutique-trending {
+  @extend .boutique-section;
+  .trending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  .trending-row-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+  }
+  .trending-card {
+    @extend .card;
+    &.trending-card-vertical {
+      .card-image img {
+        height: 250px;
+      }
+    }
+    &.trending-card-row {
+      display: flex;
+      height: 150px;
+      .card-image {
+        width: 150px; // Réduit de 200px à 150px
+        img {
+          height: 100%;
+        }
+      }
+      .card-content {
+        padding: 10px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 4px; // Légèrement augmenté
+        h3, h6 {
+          font-size: 1rem; // Remonté de 0.95rem
+          color: $primary-text-color;
+          margin: 0;
+          white-space: normal;
+          word-wrap: break-word;
+          line-height: 1.2;
+          max-height: 2.4rem; // 2 lignes x 1.2rem
+          overflow: hidden;
+          text-overflow: ellipsis;
+          align-self: flex-start;
+        }
+        .price {
+          font-size: 0.65rem; // Remonté de 0.55rem
+          color: $primary-color;
+          font-weight: 600;
+          margin: 0;
+          align-self: flex-start;
+        }
+        .rating {
+          margin: 0;
+          align-self: flex-start;
+          .fas.fa-star {
+            font-size: 0.65rem; // Remonté de 0.55rem
+            color: $light-gray;
+            &.filled {
+              color: $primary-color;
+            }
+          }
+        }
+        .pri-btn {
+          padding: 5px 10px; // Remonté de 4px 8px
+          font-size: 0.7rem; // Remonté de 0.6rem
+          align-self: flex-end;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          i {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Banner (style offre exceptionnelle) */
+.boutique-banner {
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  padding: 60px 0;
+  text-align: center;
+  color: $white;
+  position: relative;
+  border-radius: 15px;
+  margin: 20px 0;
+  .banner-content {
+    position: relative;
+    z-index: 1;
+    h2 {
+      font-size: 2.5rem;
+      font-family: 'Futura', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .pri-btn {
+      padding: 12px 30px;
+      background: $white;
+      color: $primary-color;
+      border: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      @include transition(background, color);
+      &:hover {
+        background: $primary-color;
+        color: $white;
+      }
+    }
+  }
+}
+
+/* Tous les Articles */
+.boutique-all-products {
+  @extend .boutique-section;
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      label {
+        font-size: 1rem;
+        color: $primary-text-color;
+        font-weight: 500;
+      }
+      select {
+        padding: 8px 12px;
+        border: 1px solid $light-gray;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        color: $primary-text-color;
+        background: $white;
+        cursor: pointer;
+        @include transition(border-color);
+        &:hover, &:focus {
+          border-color: $primary-color;
+          outline: none;
+        }
+      }
+      &.checkbox {
+        input {
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .all-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+  }
+  .product-card {
+    @extend .card;
+    .card-image img {
+      height: 200px;
+    }
+    .card-content {
+      padding: 15px;
+      h6 {
+        font-size: 1.1rem;
+        max-height: 3.08rem;
+      }
+      .price {
+        font-size: 1rem;
+      }
+      .pri-btn {
+        padding: 5px 10px; // Réduit comme dans les row cards
+        font-size: 0.7rem; // Réduit comme dans les row cards
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        i {
+          margin-right: 0; // Pas d'espacement avec icône seule
+        }
+      }
+    }
+  }
+}
+
+/* New Arrivals */
+.boutique-new-arrivals {
+  @extend .boutique-section;
+  .new-arrivals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+  }
+  .arrival-card {
+    @extend .card;
+    .card-image img {
+      height: 200px;
+    }
+    .card-content {
+      padding: 15px;
+      h6 {
+        font-size: 1.1rem;
+        max-height: 3.08rem;
+      }
+      .price {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .boutique-curated .curated-grid,
+  .boutique-trending .trending-grid,
+  .boutique-all-products .all-products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .boutique-spotlight .spotlight-card .card-content,
+  .boutique-curated .curated-card .card-content,
+  .boutique-trending .trending-card .card-content,
+  .boutique-all-products .product-card .card-content,
+  .boutique-new-arrivals .arrival-card .card-content {
+    grid-template-areas:
+      "title"
+      "price"
+      "description"
+      "rating"
+      "button";
+    grid-template-columns: 1fr;
+  }
+  .boutique-curated .curated-card-row,
+  .boutique-trending .trending-card-row {
+    flex-direction: column;
+    height: auto;
+    max-width: 100%;
+    .card-image {
+      width: 100%;
+      height: 200px;
+    }
+    .card-content {
+      h3, h6 {
+        font-size: 1.2rem;
+        max-height: 3.36rem;
+      }
+    }
+  }
+  .boutique-banner h2 {
+    font-size: 2rem;
+  }
+  .filters {
+    flex-direction: column;
+    align-items: center;
   }
 }

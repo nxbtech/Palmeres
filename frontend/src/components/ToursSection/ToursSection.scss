@@ -1,224 +1,186 @@
-// Variables globales pour la cohérence
-$primary-color: #ff8200;
-$dark-color: #333;
-$light-gray: #9a9a9a;
-$medium-gray: #555;
-$white: #fff;
-$shadow-light: rgba(0, 0, 0, 0.05);
-$shadow-medium: rgba(0, 0, 0, 0.1);
+@import '../../App.scss'; // Importe les styles globaux
 
-// Mixins pour réutilisation
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin transition($properties...) {
-  transition: $properties 0.3s ease;
-}
-
-// Styles de la section
 .tours-section {
-  padding: 4rem 0;
-  background: $white;
+  padding: 40px 0; // Aligné sur page-container
+  background: $white; // Fond blanc par défaut
 }
 
 .tours-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+  @extend .page-container; // Réutilise les styles de page-container (90%, max-width 1400px)
   text-align: center;
 }
 
-.tours-subtitle {
-  font-size: 0.875rem;
-  color: $light-gray;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
-}
-
-.tours-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: $dark-color;
-  text-transform: uppercase;
-  margin-bottom: 2.5rem;
-}
-
-// Styles du Hero
+// Hero Section
 .tours-hero {
   display: flex;
-  align-items: stretch;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  flex-direction: row-reverse; // Image à gauche, texte à droite
+  align-items: center;
+  gap: 20px; // Espacement moderne comme dans vos flex-box
+  margin-bottom: 40px; // Aligné sur vos marges de section
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column-reverse; // Comme votre version initiale
   }
 }
 
-.tours-info {
+.tours-hero-image {
+  flex: 2;
+  position: relative;
+  height: 400px; // Hauteur conservée
+  border-radius: 15px; // Coins arrondis comme vos cartes
+  overflow: hidden;
+  box-shadow: $shadow-light; // Ombre légère comme vos cartes
+}
+
+.tours-hero-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  @include transition(opacity); // Transition fluide
+}
+
+.tours-hero-bullets {
+  position: absolute;
+  bottom: 20px; // Aligné sur vos designs
+  left: 50%;
+  transform: translateX(-50%);
+  @include flex-center;
+  gap: 10px; // Espacement comme dans vos grilles
+}
+
+.tours-hero-bullet {
+  width: 12px;
+  height: 12px;
+  background: $light-gray; // Gris clair par défaut
+  border-radius: 50%;
+  cursor: pointer;
+  @include transition(background);
+
+  &.active {
+    background: $primary-color; // Rouge Nike pour l’actif
+  }
+
+  &:hover {
+    background: darken($primary-color, 10%); // Rouge plus sombre au survol
+  }
+}
+
+.tours-hero-info {
   flex: 1;
-  padding: 1.5rem;
   text-align: left;
+
+  .pri-btn {
+    padding: 10px 20px; // Réduit pour ne pas prendre toute la largeur
+    width: auto; // Pas de pleine largeur
+    display: inline-block; // Comportement naturel
+  }
+
+  @media (max-width: 768px) {
+    text-align: center; // Centré sur mobile
+  }
 }
 
-.tours-hero-subtitle {
-  font-size: 0.875rem;
-  color: $light-gray;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-}
-
-.tours-info h3 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: $dark-color;
-  margin-bottom: 1rem;
-}
-
-.tours-desc {
-  font-size: 1rem;
+.tours-hero-desc {
+  font-size: 1rem; // Comme vos paragraphes
   color: $medium-gray;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  font-style: italic;
+  line-height: 1.8; // Espacement décontracté
+  margin-bottom: 25px; // Aligné sur vos paragraphes
 }
 
-.tours-price {
+.tours-hero-price {
   display: flex;
   align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 8px; // Espacement léger
+  margin-bottom: 25px; // Cohérent avec vos marges
 
-  .tours-new-price {
+  .tours-hero-new-price {
     font-size: 1.75rem;
-    color: $primary-color;
-    font-weight: 600;
+    font-weight: 700;
+    color: $primary-color; // Rouge Nike
   }
 
-  .tours-price-unit {
+  .tours-hero-price-unit {
     font-size: 0.875rem;
     color: $medium-gray;
   }
 }
 
-.tours-btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: transparent;
-  border: 1px solid $primary-color;
-  color: $primary-color;
-  text-decoration: none;
-  font-weight: 600;
-  text-transform: uppercase;
-  border-radius: 8px;
-  @include transition(background, color);
-
-  &:hover {
-    background: $primary-color;
-    color: $white;
-  }
+// Offers Row (remplace la grille)
+.tours-offers-row {
+  display: flex;
+  flex-direction: row;
+  gap: 25px; // Espacement comme dans vos grilles
+  overflow-x: auto; // Défilement horizontal si nécessaire
+  justify-content: center; // Centré si moins d’éléments que la largeur
+  padding-bottom: 10px; // Pour éviter la coupure en bas lors du scroll
 }
 
-.tours-image {
-  flex: 2;
-  position: relative;
-  height: 350px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px $shadow-medium;
-}
-
-.tours-image-slide {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  @include transition(opacity);
-}
-
-.tours-bullets {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  @include flex-center;
-  gap: 0.5rem;
-}
-
-.tours-bullet {
-  width: 1.5rem;
-  height: 0.25rem;
-  background: rgba($white, 0.7);
-  border-radius: 4px;
-  cursor: pointer;
-  @include transition(background);
-
-  &.active {
-    background: $primary-color;
-  }
-
-  &:hover {
-    background: rgba($primary-color, 0.9);
-  }
-}
-
-.tours-timer {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  background: rgba($primary-color, 0.9);
-  color: $white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-}
-
-// Styles des offres
-.tours-offers {
-  @include flex-center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.tours-offer {
-  width: 180px;
+.tours-offer-card {
   background: $white;
-  border-radius: 8px;
+  border-radius: 15px; // Coins arrondis comme vos cartes
   overflow: hidden;
   text-decoration: none;
-  box-shadow: 0 2px 10px $shadow-light;
-  @include transition(transform, box-shadow);
+  box-shadow: $shadow-light; // Ombre légère
+  @include transition(transform); // Transition comme vos cartes
+  flex: 0 0 250px; // Largeur fixe pour chaque carte
+  max-width: 250px; // Limite la largeur
 
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px $shadow-medium;
+    transform: translateY(-10px); // Décalage comme vos cartes
   }
 }
 
 .tours-offer-image {
   width: 100%;
-  height: 100px;
+  height: 150px; // Conservé
   object-fit: cover;
 }
 
 .tours-offer-content {
-  padding: 0.5rem;
+  padding: 15px; // Padding comme dans vos cartes
   text-align: left;
 
-  h5 {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: $dark-color;
-    margin-bottom: 0.25rem;
+  h6 {
+    font-size: 1rem; // Aligné sur vos h6
+    font-weight: 500;
+    color: $primary-text-color; // Gris foncé
+    margin-bottom: 0.35rem; // Comme vos h6
+    letter-spacing: 0;
+    text-transform: uppercase; // Cohérent avec vos titres
   }
 
   .tours-offer-price {
-    font-size: 1rem;
-    color: $primary-color;
+    font-size: 1.1rem; // Légèrement plus grand que dans vos cartes
+    color: $primary-color; // Rouge Nike
     font-weight: 600;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .tours-offer-card {
+    flex: 0 0 220px; // Réduit légèrement la largeur
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tours-hero-image {
+    height: 300px; // Réduit pour tablettes
+  }
+}
+
+@media (max-width: 600px) {
+  .tours-hero-image {
+    height: 200px; // Réduit pour mobile
+  }
+
+  .tours-hero-new-price {
+    font-size: 1.5rem;
+  }
+
+  .tours-offer-card {
+    flex: 0 0 200px; // Plus compact pour mobile
+    max-width: 200px;
   }
 }

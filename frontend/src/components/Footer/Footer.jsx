@@ -2,62 +2,49 @@ import React from 'react';
 import './Footer.scss';
 
 const Footer = () => {
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    console.log('Inscription à la newsletter soumise');
+  };
+
   return (
-    <footer className="section footer">
-      <div className="footer__header">
-        <a href="/" className="footer__logo">
-          <span className="logo primary">
-            <img src="./assets/images/Logo-6.png" alt="Palmeres Logo" />
-          </span>
-        </a>
-        <ul className="social">
-          <li className="social__item">
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="btn social">
-              <span className="icon twitter"></span>
-            </a>
-          </li>
-          <li className="social__item">
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="btn social">
-              <span className="icon youtube"></span>
-            </a>
-          </li>
-          <li className="social__item">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="btn social">
-              <span className="icon facebook"></span>
-            </a>
-          </li>
-          <li className="social__item">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="btn social">
-              <span className="icon instagram"></span>
-            </a>
-          </li>
-        </ul>
-        <button type="button" className="btn icon">
-          <span className="icon drop-up"></span>
-        </button>
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-column">
+          <img
+            src="https://res.cloudinary.com/drnmfxkwv/image/upload/v1743012241/skvmhyj8imumpjjyg0va.png"
+            className="footer-logo"
+            alt="Palmeres Logo"
+          />
+          <p className="footer-desc">
+            Palmeres - Votre destination à Platja d’Aro.
+          </p>
+        </div>
+        <div className="footer-column">
+          <h5 className="footer-title">Liens Rapides</h5>
+          <ul className="footer-links">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/guides">Guides</a></li>
+            <li><a href="/boutique">Boutique</a></li>
+            <li><a href="/forum">Forum</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h5 className="footer-title">Newsletter</h5>
+          <form className="footer-newsletter" onSubmit={handleNewsletterSubmit}>
+            <input
+              type="email"
+              className="footer-input"
+              placeholder="Votre email"
+              required
+            />
+            <button type="submit" className="pri-btn">S'inscrire</button>
+          </form>
+        </div>
       </div>
-      <ul className="footer__list">
-        <li className="footer__item active">
-          <a href="/" className="footer__link">Accueil</a>
-        </li>
-        <li className="footer__item">
-          <a href="/guides" className="footer__link">Guides</a>
-        </li>
-        <li className="footer__item">
-          <a href="/boutique" className="footer__link">Boutique</a>
-        </li>
-        <li className="footer__item">
-          <a href="/forum" className="footer__link">Forum</a>
-        </li>
-        <li className="footer__item">
-          <a href="/articles" className="footer__link">Articles</a>
-        </li>
-        <li className="footer__item">
-          <a href="/contact" className="footer__link">Contact</a>
-        </li>
-      </ul>
-      <div className="footer__copyright">
-        <p className="desc copyright">© 2025 Palmeres - Tous droits réservés</p>
+      <div className="footer-copyright">
+        <p>© 2025 Palmeres - Tous droits réservés</p>
       </div>
     </footer>
   );

@@ -1,77 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-// Variables inspirées de Boutique.scss
-$primary-color: #ff523b; // Même couleur que Boutique
-$dark-color: #555;
-$white: #fff;
-$shadow-light: rgba(0, 0, 0, 0.1);
-$shadow-medium: rgba(0, 0, 0, 0.2);
-
-// Mixins pour réutilisation
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin transition($properties...) {
-  transition: $properties 0.5s;
-}
+@import '../../App.scss'; // Importe les variables et mixins globaux
 
 .holiday-section {
-  padding: 4rem 0;
-  background: $white;
+  padding: 0; // Pas de padding sur la section, comme dans votre version initiale
+  border-radius: 15px; // Coins arrondis comme vos autres sections
+  overflow: hidden; // Pour gérer l'image
+  margin: 20px 0; // Marge standard de vos sections
 }
 
 .holiday-small-container {
-  max-width: 1080px; // Même largeur que Boutique
-  margin: 0 auto;
-  height: 240px; // Hauteur conservée
-  position: relative;
-  overflow: hidden;
-  background: no-repeat center / cover url('https://leloc90.github.io/loveTravel/assets/images/parallax-search-2.jpg');
-  border-radius: 12px; // Ajout d'un léger arrondi comme dans Boutique
-  box-shadow: 0 2px 10px $shadow-light;
-  @include transition(transform, box-shadow);
+  width: 90%; // Largeur standard de page-container
+  max-width: 1400px; // Comme page-container
+  margin: 0 auto; // Centré
+}
 
-  &:hover {
-    transform: translateY(-5px); // Effet de levée au survol, comme dans Boutique
-    box-shadow: 0 10px 20px $shadow-medium;
+.holiday-image {
+  width: 100%;
+  img {
+    width: 100%;
+    height: 300px; // Hauteur standard comme spotlight-card
+    object-fit: cover;
+    display: block;
   }
 }
 
 .holiday-content {
-  position: absolute;
-  inset: 0;
-  @include flex-center;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.3); // Overlay sombre pour lisibilité
-  color: $white;
-  padding: 2rem;
+  padding: 20px; // Padding interne comme dans vos sections
   text-align: center;
-  @include transition(background);
-
-  .holiday-small-container:hover & {
-    background: rgba(0, 0, 0, 0.5); // Plus sombre au survol, comme dans votre version
-  }
 }
 
 .holiday-title {
-  font-family: 'Poppins', sans-serif; // Police de Boutique
-  font-size: 2rem; // Taille conservée
-  font-weight: 600; // Légèrement moins lourd que 700
-  color: $white;
+  font-family: 'Futura', sans-serif; // Police audacieuse de vos titres
+  font-size: 2.5rem; // Taille inspirée de vos h2
+  font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
+  letter-spacing: 1px; // Comme vos titres
+  color: $secondary-color; // Noir mat au lieu de blanc, sans background
+  margin-bottom: 1.75rem; // Espacement comme vos h2
   position: relative;
-
   &::after {
     content: '';
-    background: $primary-color; // Ligne rouge comme dans Boutique
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
+    background: $primary-color; // Rouge Nike
+    width: 80px; // Comme vos h2
+    height: 4px;
+    border-radius: 2px;
     position: absolute;
     bottom: -10px;
     left: 50%;
@@ -80,33 +51,52 @@ $shadow-medium: rgba(0, 0, 0, 0.2);
 }
 
 .holiday-btn {
+  padding: 12px 30px; // Taille standard de vos boutons (pri-btn)
   display: inline-block;
-  padding: 0.75rem 2rem; // Taille conservée
-  background: $primary-color; // Couleur principale de Boutique
-  color: $white;
-  text-decoration: none;
+  background: $secondary-color; // Noir mat par défaut
+  color: $accent-color; // Blanc éclatant
+  border: 2px solid $secondary-color; // Bordure nette
+  border-radius: 0; // Style brut
   font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
-  border-radius: 30px; // Arrondi plus prononcé, comme dans Boutique
-  border: none;
-  @include transition(background, transform);
-
+  letter-spacing: 1.5px;
+  text-decoration: none; // Pas de soulignement
+  @include transition(background, color, transform); // Transition fluide
   &:hover {
-    background: darken($primary-color, 20%); // Assombrissement au survol, comme dans Boutique
-    transform: scale(1.05); // Effet de zoom conservé
+    background: $primary-color; // Rouge au survol
+    color: $white;
+    transform: translateY(-2px); // Décalage comme vos boutons
   }
 }
 
-// Responsive
-@media only screen and (max-width: 600px) {
+/* Responsive */
+@media (max-width: 768px) {
+  .holiday-image {
+    img {
+      height: 250px; // Réduit comme dans curated-card-vertical
+    }
+  }
+
   .holiday-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem; // Comme vos h2 en responsive
   }
 
   .holiday-btn {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.875rem;
+    padding: 10px 20px; // Réduit comme vos boutons
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .holiday-image {
+    img {
+      height: 200px; // Réduit comme dans all-products-grid
+    }
+  }
+
+  .holiday-title {
+    font-size: 1.5rem; // Ajustement mobile
   }
 }

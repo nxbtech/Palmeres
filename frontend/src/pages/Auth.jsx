@@ -32,7 +32,7 @@ const Auth = () => {
       }
 
       const data = await response.json();
-      localStorage.setItem('token', data.token || 'dummy-token'); // Utilisez le vrai token si renvoyé
+      localStorage.setItem('token', data.token || 'dummy-token');
       alert(data.message);
       navigate('/');
     } catch (err) {
@@ -45,16 +45,33 @@ const Auth = () => {
   return (
     <PageLayout
       title={isLogin ? 'Connexion' : 'Inscription'}
-      subtitle={isLogin ? 'Connectez-vous' : 'Créez un compte'}
-      image="https://i.postimg.cc/nz6YzMPg/background.jpg"
+      subtitle={isLogin ? 'Connectez-vous à votre compte' : 'Rejoignez la communauté'}
+      image="https://res.cloudinary.com/drnmfxkwv/image/upload/v1742937679/banniere-connexion_owosrk.jpg"
     >
       <div className="auth-account-page">
         <div className="auth-container">
           <div className="auth-row">
-            <div className="auth-col-2">
-              <img src="https://via.placeholder.com/300" width="100%" alt="Background" />
+            <div className="auth-col auth-info">
+              <h3 className="auth-info-title">Pourquoi nous rejoindre ?</h3>
+              <ul className="auth-info-list">
+                <li>
+                  <i className="fas fa-check-circle"></i> Accès exclusif au forum
+                </li>
+                <li>
+                  <i className="fas fa-check-circle"></i> Offres spéciales à Platja d’Aro
+                </li>
+                <li>
+                  <i className="fas fa-check-circle"></i> Communauté francophone active
+                </li>
+              </ul>
+              <button
+                className="auth-support-btn"
+                onClick={() => alert('Contacter le support')}
+              >
+                <i className="fas fa-headset"></i> Besoin d’aide ?
+              </button>
             </div>
-            <div className="auth-col-2">
+            <div className="auth-col auth-form-col">
               <div className="auth-form-container">
                 <div className="auth-form-btn">
                   <span
@@ -73,38 +90,51 @@ const Auth = () => {
                 </div>
                 <form onSubmit={handleSubmit} className="auth-form">
                   {!isLogin && (
+                    <div className="form-group">
+                      <i className="fas fa-user"></i>
+                      <input
+                        type="text"
+                        placeholder="Nom d'utilisateur"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                      />
+                    </div>
+                  )}
+                  <div className="form-group">
+                    <i className="fas fa-envelope"></i>
                     <input
-                      type="text"
-                      placeholder="Nom d'utilisateur"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
-                  )}
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="password"
-                    placeholder="Mot de passe"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <button type="submit" className="auth-btn" disabled={loading}>
+                  </div>
+                  <div className="form-group">
+                    <i className="fas fa-lock"></i>
+                    <input
+                      type="password"
+                      placeholder="Mot de passe"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="pri-btn" disabled={loading}>
                     {loading ? 'Chargement...' : (isLogin ? 'Connexion' : 'S’inscrire')}
                   </button>
-                  {isLogin && <a href="#">Mot de passe oublié ?</a>}
+                  {isLogin && (
+                    <a href="#" className="auth-forgot-link">
+                      Mot de passe oublié ?
+                    </a>
+                  )}
                 </form>
+                {error && <p className="auth-error">{error}</p>}
               </div>
             </div>
           </div>
         </div>
-        {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
       </div>
     </PageLayout>
   );

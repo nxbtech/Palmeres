@@ -26,25 +26,36 @@ const PromotionSection = () => {
       price: 15,
       description: 'Protège-toi du soleil.',
     },
+    {
+      id: '4',
+      title: 'Sac Platja Style',
+      image: 'https://i.postimg.cc/3JqL5gL8/f4.jpg',
+      price: 30,
+      description: 'Idéal pour tes sorties.',
+    },
   ];
 
   return (
     <section className="promo-section">
-      <div className="promo-small-container">
-        <h2 className="promo-title">Nos Produits Phares</h2>
+      <div className="promo-container">
+        <h2 className="section-title">Nos Produits Phares</h2>
         <div className="promo-row">
           {products.map((product) => (
-            <div key={product.id} className="promo-col-4">
-              <img src={product.image} alt={product.title} />
-              <h4>{product.title}</h4>
-              <p className="promo-desc">{product.description}</p>
-              <p className="promo-price">{`€${product.price.toFixed(2)}`}</p>
-              <button
-                className="promo-btn"
-                onClick={() => addToCart({ name: product.title, image: product.image, price: product.price })}
-              >
-                Ajouter au panier
-              </button>
+            <div key={product.id} className="promo-card">
+              <div className="card-image">
+                <img src={product.image} alt={product.title} />
+              </div>
+              <div className="card-content">
+                <h6>{product.title}</h6>
+                <p className="price">{`€${product.price.toFixed(2)}`}</p>
+                <p className="description">{product.description}</p>
+                <button
+                  className="pri-btn"
+                  onClick={() => addToCart({ name: product.title, image: product.image, price: product.price })}
+                >
+                  Ajouter au panier
+                </button>
+              </div>
             </div>
           ))}
         </div>

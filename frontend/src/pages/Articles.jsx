@@ -34,7 +34,7 @@ const Articles = () => {
     <PageLayout
       title="Articles"
       subtitle="Actualités et Conseils"
-      image="https://i.pinimg.com/564x/88/48/78/884878043ee17464c8972e66effcc716.jpg"
+      image="https://res.cloudinary.com/drnmfxkwv/image/upload/v1742936899/bannieres-articles_fkvjxn.jpg"
     >
       <section className="section-p1">
         <h2>Nos Articles</h2>

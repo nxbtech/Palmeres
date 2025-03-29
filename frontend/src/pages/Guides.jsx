@@ -7,6 +7,7 @@ const Guides = () => {
   const [guides, setGuides] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,94 +28,136 @@ const Guides = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleCardClick = (id) => {
-    navigate(`/guide/${id}`);
-  };
+  const filteredGuides = guides.filter((guide) => filter === 'all' || guide.category === filter);
+  const spotlightGuide = guides[0]; // Premier guide pour "Guide du Moment"
+  const featuredGuides = guides.slice(0, 3); // 3 guides pour "Guides en Vedette"
 
-  // Sélectionner les 4 premiers guides pour la section "Guides en Vedette"
-  const featuredGuides = guides.slice(0, 4);
-
-  const featuredImages = [
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1887&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1618245318763-a15156d6b28c?q=80&w=1887&auto=format&fit=crop',
-  ];
+  const handleFilterChange = (value) => setFilter(value);
+  const handleCardClick = (id) => navigate(`/guide/${id}`);
 
   return (
     <PageLayout
       title="Nos Guides"
       subtitle="Explorez Platja d’Aro"
-      image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop"
+      image="https://res.cloudinary.com/drnmfxkwv/image/upload/v1742936902/banniere-guides_xuas76.jpg"
     >
-      {/* Featured Categories */}
-      <div className="guides-categories">
-        <div className="guides-small-container">
-          <div className="guides-row">
-            {featuredImages.map((img, index) => (
-              <div key={index} className="guides-col-3">
-                <img src={img} alt={`Guide ${index + 1}`} />
+      {/* Loader */}
+      {loading && (
+        <div className="guides-loader">
+          <div className="loader-circle"></div>
+          <p>Chargement des guides...</p>
+        </div>
+      )}
+
+      {/* Guide du Moment (Grande Carte) */}
+      {!loading && spotlightGuide && (
+        <section className="guides-spotlight">
+          <div className="guides-container">
+            <h2 className="section-title">Guide du Moment</h2>
+            <div className="spotlight-card">
+              <div className="card-image" onClick={() => handleCardClick(spotlightGuide._id)}>
+                <img src={spotlightGuide.image} alt={spotlightGuide.name} />
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Featured Guides */}
-      <div className="guides-small-container">
-        <h2 className="guides-title">Guides en Vedette</h2>
-        <div className="guides-row">
-          {loading && <p>Chargement...</p>}
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          {!loading && !error && featuredGuides.length === 0 && <p>Aucun guide disponible.</p>}
-          {featuredGuides.map((guide) => (
-            <div key={guide._id} className="guides-col-4" onClick={() => handleCardClick(guide._id)}>
-              <img src={guide.image} alt={guide.name} />
-              <h4>{guide.name || 'Guide par défaut'}</h4>
-              <p>{guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}</p>
-              <a href={guide.link} className="guides-btn">Télécharger →</a>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* All Guides */}
-      <div className="guides-small-container">
-        <h2 className="guides-title">Tous Nos Guides</h2>
-        <div className="guides-row">
-          {loading && <p>Chargement...</p>}
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          {!loading && !error && guides.length === 0 && <p>Aucun guide disponible.</p>}
-          {guides.map((guide) => (
-            <div key={guide._id} className="guides-col-4" onClick={() => handleCardClick(guide._id)}>
-              <img src={guide.image} alt={guide.name} />
-              <h4>{guide.name || 'Guide par défaut'}</h4>
-              <p>{guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}</p>
-              <a href={guide.link} className="guides-btn">Télécharger →</a>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Offer Section */}
-      <div className="guides-offer">
-        <div className="guides-small-container">
-          <div className="guides-row">
-            <div className="guides-col-2">
-              <img
-                src={guides[0]?.image || 'https://via.placeholder.com/600x300'}
-                className="guides-offer-img"
-                alt="Offre Exclusive"
-              />
-            </div>
-            <div className="guides-col-2">
-              <p>Exclusivement à Platja d'Aro</p>
-              <h1>Promo de Fin de Saison</h1>
-              <small>Jusqu’à 20% de réduction sur une sélection de guides et services.</small>
-              <a href="#guides" className="guides-btn">Découvrir Maintenant →</a>
+              <div className="card-content">
+                <h3>{spotlightGuide.name || 'Guide par défaut'}</h3>
+                <p className="description">
+                  {spotlightGuide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}
+                </p>
+                <div className="rating">
+                  {[...Array(5)].map((_, i) => (
+                    <i key={i} className={`fas fa-star ${i < Math.floor(spotlightGuide.rating || 4) ? 'filled' : ''}`} />
+                  ))}
+                </div>
+                <button className="pri-btn" onClick={() => handleCardClick(spotlightGuide._id)}>
+                  <i className="fas fa-info-circle"></i>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      )}
+
+      {/* Guides en Vedette */}
+      {!loading && featuredGuides.length > 0 && (
+        <section className="guides-featured">
+          <div className="guides-container">
+            <h2 className="section-title">Guides en Vedette</h2>
+            <div className="featured-grid">
+              {featuredGuides.map((guide) => (
+                <div key={guide._id} className="featured-card">
+                  <div className="card-image" onClick={() => handleCardClick(guide._id)}>
+                    <img src={guide.image} alt={guide.name} />
+                  </div>
+                  <div className="card-content">
+                    <h6>{guide.name || 'Guide par défaut'}</h6>
+                    <p className="description">
+                      {guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}
+                    </p>
+                    <div className="rating">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`fas fa-star ${i < Math.floor(guide.rating || 4) ? 'filled' : ''}`} />
+                      ))}
+                    </div>
+                    <button className="pri-btn" onClick={() => handleCardClick(guide._id)}>
+                      <i className="fas fa-info-circle"></i>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Filtres */}
+      {!loading && guides.length > 0 && (
+        <section className="guides-filters-section">
+          <div className="guides-container">
+            <div className="filters">
+              <div className="filter-group">
+                <label>Catégorie :</label>
+                <select value={filter} onChange={(e) => handleFilterChange(e.target.value)}>
+                  <option value="all">Toutes</option>
+                  <option value="tourist">Touristique</option>
+                  <option value="expat">Expat</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Tous les Guides */}
+      {!loading && filteredGuides.length > 0 && (
+        <section className="guides-all-items">
+          <div className="guides-container">
+            <h2 className="section-title">Tous les Guides</h2>
+            <div className="all-items-grid">
+              {filteredGuides.map((guide) => (
+                <div key={guide._id} className="item-card">
+                  <div className="card-image" onClick={() => handleCardClick(guide._id)}>
+                    <img src={guide.image} alt={guide.name} />
+                  </div>
+                  <div className="card-content">
+                    <h6>{guide.name || 'Guide par défaut'}</h6>
+                    <p className="description">
+                      {guide.category === 'expat' ? 'Guide pour expatriés' : 'Guide touristique'}
+                    </p>
+                    <div className="rating">
+                      {[...Array(5)].map((_, i) => (
+                        <i key={i} className={`fas fa-star ${i < Math.floor(guide.rating || 4) ? 'filled' : ''}`} />
+                      ))}
+                    </div>
+                    <button className="pri-btn" onClick={() => handleCardClick(guide._id)}>
+                      <i className="fas fa-info-circle"></i>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </PageLayout>
   );
 };

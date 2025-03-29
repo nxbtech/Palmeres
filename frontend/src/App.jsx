@@ -27,8 +27,11 @@ import ErrorPage from './pages/ErrorPage';
 import Cart from './pages/Cart';
 import ProductDetailPage from './pages/ProductDetailPage';
 import Profile from './pages/Profile';
+import CoupDeCoeurDetailPage from './pages/CoupDeCoeurDetailPage'; // Import ajouté
 import './App.scss';
 import CookieConsent from './components/CookieConsent/CookieConsent';
+import BonsPlans from './pages/BonsPlans'; // Ajustez le chemin
+import Calendar from './pages/Calendar'; // Ajustez le chemin
 
 const App = () => {
   const [acceptedCookies, setAcceptedCookies] = useState(localStorage.getItem('cookiesAccepted') === 'true');
@@ -62,6 +65,7 @@ const App = () => {
                 }
               />
               <Route path="/coup-de-coeur" element={<CoupDeCoeur />} />
+              <Route path="/coup-de-coeur/:id" element={<CoupDeCoeurDetailPage />} /> {/* Route ajoutée */}
               <Route path="/boutique" element={<Boutique />} />
               <Route path="/guides" element={<Guides />} />
               <Route path="/forum" element={<Forum />} />
@@ -79,6 +83,8 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               {!acceptedCookies && <Route path="*" element={<Navigate to="/cookie-consent" />} />}
               <Route path="/cookie-consent" element={<CookieConsent onAccept={handleAcceptCookies} />} />
+              <Route path="/bons-plans" element={<BonsPlans />} />
+              <Route path="/calendar" element={<Calendar />} />
             </Routes>
           </ErrorBoundary>
         </main>

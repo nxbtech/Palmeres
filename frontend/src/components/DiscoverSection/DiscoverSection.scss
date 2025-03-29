@@ -1,34 +1,35 @@
+@import '../../App.scss'; // Importe les styles globaux
+
 .discover-section {
-  padding: 4rem 0;
-  margin-bottom: 40px;
+  padding: 0; // Pas de padding, comme votre version
+  margin: 20px 0; // Marge verticale standard
+  width: 100%; // Pleine largeur de la page
+  height: 230px; // Hauteur fixe conservée
+  background-image: url('https://res.cloudinary.com/drnmfxkwv/image/upload/v1742924229/banniere-guide_f7hhli.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; // Image adaptée à la pleine largeur
+  border-radius: 0; // Pas de coins arrondis pour pleine largeur
+  overflow: hidden; // Pour gérer les bordures
 }
 
 .discover-container {
-  width: 100%;
+  width: 100%; // Pleine largeur
+  height: 100%;
   display: flex;
   justify-content: center;
 }
 
 .discover-card {
   flex: 1;
-  height: 230px;
+  height: 230px; // Hauteur fixe conservée
   position: relative;
   overflow: hidden;
+  background: none; // Pas de fond spécifique
 
-  &:hover {
-
-    .discover-btn {
-      background: #ff8200;
-      color: #fff;
-    }
-  }
-
-  &--expat {
-    background: no-repeat center / cover url(https://i.pinimg.com/564x/47/e2/8c/47e28cb37314c93cdb615ff64bd2c0e5.jpg);
-  }
-
-  &--tourism {
-    background: no-repeat center / cover url(https://i.pinimg.com/564x/d6/62/c1/d662c1c1725a7d182c1712d9f1ee106c.jpg);
+  &.--expat,
+  &.--tourism {
+    background: none; // Classes conservées mais sans effet supplémentaire
   }
 }
 
@@ -39,47 +40,112 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.3); // Overlay sombre pour lisibilité
-  color: #fff;
-  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3); // Fond semi-transparent initial
+  color: $white; // Texte blanc
+  padding: 20px; // Padding réduit pour cohérence
   text-align: center;
-  transition: background 0.3s ease;
-}
+  @include transition(background); // Transition fluide
 
-.discover-card:hover .discover-content {
-  background: rgba(0, 0, 0, 0.5); // Overlay plus sombre au hover
+  &:hover {
+    background: rgba(0, 0, 0, 0.5); // Plus sombre au survol
+  }
 }
 
 .discover-label {
-  font-size: 0.875rem; // 14px
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 0.75rem;
-  opacity: 0.9;
+  @extend .sub-title__text; // Réutilise votre classe utilitaire
 }
 
 h4 {
-  font-size: 1.75rem; // 28px
+  font-family: 'Futura', sans-serif; // Police audacieuse de vos titres
+  font-size: 1.75rem; // Réduit pour s’aligner sur vos h4
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px; // Comme vos titres
+  margin-bottom: 0.45rem; // Espacement comme vos h4
 }
 
 .discover-btn {
-  display: inline-block;
-  padding: 0.625rem 1.5rem; // Plus compact
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.875rem; // 14px
-  font-weight: 600;
-  text-transform: uppercase;
-  border-radius: 20px;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-
+  @extend .pri-btn; // Réutilise votre bouton primaire
+  padding: 10px 20px; // Réduit pour compacité
+  background: $white; // Fond blanc au lieu de transparent
+  color: $primary-color; // Texte rouge
+  border: none; // Pas de bordure
   &:hover {
-    transform: scale(1.05);
+    background: $primary-color; // Rouge au survol
+    color: $white;
+    transform: translateY(-2px); // Décalage comme vos boutons
+  }
+}
+
+/* Loader */
+.discover-loader {
+  height: 230px; // Même hauteur que la section
+  width: 100%; // Pleine largeur
+  @include flex-center;
+  flex-direction: column;
+  background: $white;
+  .loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 6px solid $light-gray;
+    border-top: 6px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1.2s ease-in-out infinite;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: $medium-gray;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Erreur et vide */
+.discover-error,
+.discover-empty {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  height: 230px; // Même hauteur que la section
+  width: 100%; // Pleine largeur
+  background: $white;
+}
+
+.discover-error {
+  color: lighten($primary-color, 20%); // Rouge clair pour erreur
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .discover-container {
+    flex-direction: column; // Passe en colonne sur mobile
+    height: auto; // Hauteur dynamique
+  }
+
+  .discover-card {
+    height: 200px; // Réduit pour mobile
+  }
+
+  h4 {
+    font-size: 1.5rem; // Ajusté comme vos h4 en responsive
+  }
+
+  .discover-btn {
+    padding: 8px 16px; // Plus compact
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .discover-card {
+    height: 180px; // Encore plus compact
+  }
+
+  h4 {
+    font-size: 1.25rem; // Aligné sur vos h4 mobile
   }
 }

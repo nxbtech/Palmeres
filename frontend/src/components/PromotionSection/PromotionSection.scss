@@ -1,129 +1,168 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-// Variables pour la cohérence
-$primary-color: #ff523b;
-$dark-color: #555;
-$medium-gray: #777;
-$white: #fff;
-$shadow-light: rgba(0, 0, 0, 0.1);
-
-// Mixins pour réutilisation
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin transition($properties...) {
-  transition: $properties 0.5s;
-}
+@import '../../App.scss'; // Importe les styles globaux
 
 .promo-section {
-  padding: 4rem 0;
-  background: $white;
+  padding: 40px 0; // Aligné sur vos sections comme boutique-section
+  background: $white; // Fond blanc par défaut
 }
 
-.promo-small-container {
-  max-width: 1080px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
-  text-align: center;
+.promo-container {
+  @extend .page-container; // Réutilise les styles de page-container (90%, max-width 1400px)
 }
 
-.promo-title {
+.section-title {
+  font-size: 2.8rem; // Comme dans vos sections
+  color: $primary-text-color; // Gris foncé
   text-align: center;
-  margin: 0 auto 80px;
+  margin-bottom: 40px; // Aligné sur vos sections
   position: relative;
-  line-height: 60px;
-  color: $dark-color;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-
+  letter-spacing: 2px;
+  font-family: 'Futura', sans-serif;
+  text-transform: uppercase;
   &::after {
     content: '';
-    background: $primary-color;
     width: 80px;
-    height: 5px;
-    border-radius: 5px;
+    height: 4px;
+    background: $primary-color; // Rouge Nike
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
   }
 }
 
 .promo-row {
-  @include flex-center;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  gap: 25px; // Espacement comme dans vos grilles
+  justify-content: center; // Centré
+  flex-wrap: wrap; // Retour à la ligne si nécessaire
 }
 
-.promo-col-4 {
-  flex-basis: 25%;
-  padding: 10px;
-  min-width: 200px;
-  margin-bottom: 50px;
-  @include transition(transform);
-
+.promo-card {
+  border-radius: 15px; // Coins arrondis comme vos cartes
+  overflow: hidden;
+  box-shadow: $shadow-light; // Ombre légère
+  @include transition(transform); // Transition comme vos cartes
+  max-width: 300px; // Comme vos curated-card
+  margin: 0 auto; // Centré dans la row
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px); // Décalage comme vos cartes
   }
+}
 
+.card-image {
   img {
     width: 100%;
-    height: 250px;
+    height: 200px; // Hauteur comme dans all-products-grid
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px $shadow-light;
   }
 }
 
-h4 {
-  color: $dark-color;
-  font-weight: normal;
-  font-size: 1.25rem;
-  margin: 10px 0;
-  font-family: 'Poppins', sans-serif;
-}
+.card-content {
+  padding: 15px; // Padding comme dans vos cartes
+  display: grid;
+  grid-template-areas:
+    "title price"
+    "description description"
+    "button button"; // Grille inspirée de boutique-all-products
+  grid-template-columns: 1fr auto; // Titre à gauche, prix à droite
+  grid-template-rows: auto auto auto;
+  gap: 10px; // Espacement comme dans vos cartes
+  align-items: center;
 
-.promo-desc {
-  font-size: 0.875rem;
-  color: $medium-gray;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
-}
+  h6 {
+    grid-area: title;
+    font-size: 1.1rem; // Comme dans vos cartes (all-products)
+    color: $primary-text-color; // Gris foncé
+    font-weight: 500;
+    text-align: left;
+    margin: 0;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    max-height: 3.08rem; // Comme dans vos cartes
+  }
 
-.promo-price {
-  font-size: 1.125rem;
-  color: $primary-color;
-  font-weight: 600;
-  margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif;
-}
+  .price {
+    grid-area: price;
+    font-size: 1rem; // Comme dans vos cartes
+    color: $primary-color; // Rouge Nike
+    font-weight: 600;
+    text-align: right;
+    margin: 0;
+  }
 
-.promo-btn {
-  display: inline-block;
-  background: $primary-color;
-  color: $white;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 30px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  text-transform: uppercase;
-  cursor: pointer;
-  @include transition(background);
+  .description {
+    grid-area: description;
+    font-size: 0.9rem; // Comme dans vos cartes
+    color: $medium-gray;
+    text-align: left;
+    margin: 0;
+  }
 
-  &:hover {
-    background: darken($primary-color, 20%);
+  .pri-btn {
+    grid-area: button;
+    padding: 5px 10px; // Réduit comme dans vos cartes (all-products)
+    font-size: 0.7rem; // Comme dans vos cartes
+    background: $secondary-color; // Noir mat
+    color: $accent-color; // Blanc
+    border: 2px solid $secondary-color;
+    @include transition(background, color, transform);
+    width: fit-content; // Bouton ajusté à son contenu
+    justify-self: center; // Centré dans la grille
+    &:hover {
+      background: $primary-color; // Rouge au survol
+      color: $white;
+      transform: translateY(-2px);
+    }
   }
 }
 
-// Responsive
-@media only screen and (max-width: 600px) {
-  .promo-col-4 {
-    flex-basis: 100%;
+/* Responsive */
+@media (max-width: 1024px) {
+  .promo-card {
+    max-width: 250px; // Réduit pour tablettes
+  }
+}
+
+@media (max-width: 768px) {
+  .promo-row {
+    flex-direction: column; // Passe en colonne sur mobile
+    align-items: center;
+  }
+
+  .promo-card {
+    max-width: 300px; // Garde une largeur raisonnable
+    .card-image img {
+      height: 180px; // Réduit pour mobile
+    }
+    .card-content {
+      grid-template-areas:
+        "title"
+        "price"
+        "description"
+        "button"; // Reorganisé pour mobile
+      grid-template-columns: 1fr; // Une seule colonne
+      text-align: center;
+      .price {
+        text-align: center; // Centré sur mobile
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .promo-card {
+    .card-image img {
+      height: 150px; // Encore plus compact
+    }
+  }
+
+  .section-title {
+    font-size: 2rem; // Réduit comme vos titres sur mobile
   }
 }
