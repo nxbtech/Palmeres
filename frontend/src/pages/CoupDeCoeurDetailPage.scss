@@ -1,110 +1,310 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+/* Assumant que tu as déjà un fichier SCSS existant, voici les ajouts nécessaires */
+@import '../App.scss';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-.coup-de-coeur-small-container {
-  max-width: 1080px;
+.cdc-detail-section {
+  padding: 60px 0;
+}
+
+.cdc-container {
+  @extend .page-container;
+  max-width: 1200px;
+}
+
+.cdc-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.cdc-image-gallery {
+  .cdc-main-image {
+    img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: $shadow-light;
+    }
+  }
+
+  .cdc-thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+
+    .cdc-thumbnail {
+      img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        @include transition(transform);
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
+.cdc-info-grid {
+  .cdc-title {
+    font-size: 2.5rem;
+    color: $primary-text-color;
+    margin-bottom: 20px;
+    font-family: 'Futura', sans-serif;
+  }
+
+  .cdc-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .cdc-category {
+      font-size: 1rem;
+      color: $primary-color;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .cdc-rating {
+      .fas.fa-star {
+        font-size: 1rem;
+        color: $light-gray;
+        &.filled {
+          color: $primary-color;
+        }
+      }
+
+      .cdc-michelin {
+        margin-left: 10px;
+        .fas.fa-star.michelin {
+          color: #ff4444;
+        }
+      }
+    }
+  }
+
+  .cdc-description {
+    font-size: 1.1rem;
+    color: $medium-gray;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .cdc-highlight {
+    font-size: 1rem;
+    color: $primary-text-color;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .fas.fa-heart {
+      color: $primary-color;
+      font-size: 1rem;
+    }
+  }
+
+  .cdc-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .cdc-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      color: $medium-gray;
+
+      .fas {
+        color: $primary-color;
+        font-size: 1rem;
+      }
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        @include transition(color);
+        &:hover {
+          color: darken($primary-color, 15%);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/* Styles pour la section "Autres Coups de Cœur" (inchangés) */
+.cdc-related-section {
+  padding: 60px 0;
+
+  .section-title {
+    font-size: 2rem;
+    color: $primary-text-color;
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Futura', sans-serif;
+  }
+
+  .cdc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .cdc-related-card {
+    background: $white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: $shadow-light;
+    @include transition(transform);
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+
+    .card-image {
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+    }
+
+    .card-content {
+      padding: 15px;
+      text-align: center;
+
+      h6 {
+        font-size: 1.1rem;
+        color: $primary-text-color;
+        margin-bottom: 10px;
+      }
+
+      .rating {
+        margin-bottom: 15px;
+        .fas.fa-star {
+          font-size: 0.9rem;
+          color: $light-gray;
+          &.filled {
+            color: $primary-color;
+          }
+        }
+      }
+
+      .pri-btn.small {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .cdc-see-more {
+    text-align: center;
+    margin-top: 40px;
+
+    .sec-btn {
+      padding: 10px 25px;
+      font-size: 1rem;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cdc-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cdc-main-image img {
+    height: 300px;
+  }
+
+  .cdc-info-grid .cdc-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cdc-info-grid .cdc-title {
+    font-size: 1.8rem;
+  }
+
+  .cdc-main-image img {
+    height: 250px;
+  }
+}
+/* Conteneur principal des détails */
+.cdc-details {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin-top: 15px;
   margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
 }
 
-.coup-de-coeur-single {
-  margin-top: 80px;
-}
-
-.coup-de-coeur-row {
+/* Ligne des icônes */
+.cdc-icons-row {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between; /* Répartit les icônes uniformément */
+  align-items: center; /* Centre les icônes verticalement */
+  width: 100%;
+  padding: 0 10px; /* Espace sur les côtés */
 }
 
-.coup-de-coeur-col-2 {
-  flex-basis: 50%;
-  min-width: 300px;
-  padding: 20px;
-}
-
-.coup-de-coeur-col-2 img {
-  padding: 0;
-  max-width: 100%;
-  height: 500px; /* Dimension fixe pour l'image principale */
-  object-fit: cover;
-}
-
-.coup-de-coeur-small-img-row {
+/* Chaque élément contenant une icône */
+.cdc-detail-item {
+  flex: 1; /* Donne un espace égal à chaque icône */
   display: flex;
-  justify-content: space-between;
-}
-
-.coup-de-coeur-small-img-col {
-  flex-basis: 24%;
+  justify-content: center; /* Centre l’icône horizontalement dans son espace */
   cursor: pointer;
 }
 
-.coup-de-coeur-small-img-col img {
+/* Style des icônes */
+.cdc-detail-item i {
+  font-size: 1.5em;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.cdc-detail-item i:hover {
+  color: #ff6347; /* Couleur au survol */
+}
+
+/* Zone d’affichage de l’info active */
+.cdc-info-display {
+  margin-top: 10px;
+  text-align: center; /* Centre l’info affichée */
+  font-size: 0.9em;
+  color: #333;
   width: 100%;
-  height: 100px; /* Dimension fixe pour les petites images */
-  object-fit: cover;
 }
 
-.coup-de-coeur-col-2 h4 {
-  margin: 20px 0;
-  font-size: 22px;
-  font-weight: bold;
+.cdc-info-display span, 
+.cdc-info-display a {
+  display: block;
+  word-wrap: break-word;
 }
 
-.coup-de-coeur-btn {
-  display: inline-block;
-  background: #ff523b;
-  color: white;
-  padding: 8px 30px;
-  margin: 30px 0;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: background 0.5s;
+.cdc-info-display ul {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
 }
 
-.coup-de-coeur-btn:hover {
-  background: #563434;
+.cdc-info-display ul li {
+  margin: 2px 0;
 }
 
-.coup-de-coeur-row-2 {
-  justify-content: space-between;
-  margin: 100px auto 50px;
-}
-
-.coup-de-coeur-col-4 {
-  flex-basis: 25%;
-  padding: 10px;
-  min-width: 200px;
-  margin-bottom: 50px;
-  transition: transform 0.5s;
-}
-
-.coup-de-coeur-col-4 img {
+/* Assurez-vous que la grille d’info prend bien la largeur */
+.cdc-info-grid {
   width: 100%;
-  height: 250px; /* Dimension fixe pour les éléments similaires */
-  object-fit: cover;
-}
-
-.coup-de-coeur-col-4:hover {
-  transform: translateY(-5px);
-}
-
-@media only screen and (max-width: 600px) {
-  .coup-de-coeur-row {
-    text-align: center;
-  }
-  .coup-de-coeur-col-2,
-  .coup-de-coeur-col-4 {
-    flex-basis: 100%;
-  }
-  .coup-de-coeur-col-2 {
-    padding: 20px 0;
-  }
-  .coup-de-coeur-col-2 h1 {
-    font-size: 26px;
-    line-height: 32px;
-  }
 }

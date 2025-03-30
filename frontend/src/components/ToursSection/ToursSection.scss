@@ -1,186 +1,325 @@
-@import '../../App.scss'; // Importe les styles globaux
+@import '../../App.scss';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 .tours-section {
-  padding: 40px 0; // Aligné sur page-container
-  background: $white; // Fond blanc par défaut
+  padding: 60px 0;
 }
 
 .tours-container {
-  @extend .page-container; // Réutilise les styles de page-container (90%, max-width 1400px)
-  text-align: center;
+  @extend .page-container;
+  max-width: 1200px;
 }
 
-// Hero Section
 .tours-hero {
   display: flex;
-  flex-direction: row-reverse; // Image à gauche, texte à droite
-  align-items: center;
-  gap: 20px; // Espacement moderne comme dans vos flex-box
-  margin-bottom: 40px; // Aligné sur vos marges de section
-
-  @media (max-width: 768px) {
-    flex-direction: column-reverse; // Comme votre version initiale
-  }
-}
-
-.tours-hero-image {
-  flex: 2;
-  position: relative;
-  height: 400px; // Hauteur conservée
-  border-radius: 15px; // Coins arrondis comme vos cartes
-  overflow: hidden;
-  box-shadow: $shadow-light; // Ombre légère comme vos cartes
-}
-
-.tours-hero-slide {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  @include transition(opacity); // Transition fluide
-}
-
-.tours-hero-bullets {
-  position: absolute;
-  bottom: 20px; // Aligné sur vos designs
-  left: 50%;
-  transform: translateX(-50%);
-  @include flex-center;
-  gap: 10px; // Espacement comme dans vos grilles
-}
-
-.tours-hero-bullet {
-  width: 12px;
-  height: 12px;
-  background: $light-gray; // Gris clair par défaut
-  border-radius: 50%;
-  cursor: pointer;
-  @include transition(background);
-
-  &.active {
-    background: $primary-color; // Rouge Nike pour l’actif
-  }
-
-  &:hover {
-    background: darken($primary-color, 10%); // Rouge plus sombre au survol
-  }
+  gap: 30px;
+  align-items: stretch;
+  margin-bottom: 40px;
 }
 
 .tours-hero-info {
   flex: 1;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tours-hero-grid {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "details"
+    "button";
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+
+  .tours-hero-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .title__text {
+    font-size: 2.2rem;
+    color: $primary-text-color;
+    margin: 0;
+    line-height: 1.2;
+    font-family: 'Futura', sans-serif;
+    text-transform: uppercase;
+  }
+
+  .tours-hero-stars {
+    display: flex;
+    gap: 4px;
+
+    .fas.fa-star {
+      font-size: 1.2rem;
+      color: $primary-color;
+    }
+  }
+
+  .tours-hero-details {
+    grid-area: details;
+    display: grid;
+    grid-template-areas:
+      "location"
+      "desc"
+      "highlights"
+      "price";
+    grid-template-rows: auto auto auto auto;
+    gap: 15px;
+    position: relative;
+  }
+
+  .tours-hero-location {
+    grid-area: location;
+    font-size: 1.1rem;
+    color: $medium-gray;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .fas {
+      color: $primary-color;
+      font-size: 1rem;
+    }
+  }
+
+  .tours-hero-desc {
+    grid-area: desc;
+    font-size: 1rem;
+    color: $medium-gray;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .tours-hero-highlights {
+    grid-area: highlights;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    li {
+      font-size: 0.95rem;
+      color: $primary-text-color;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .fas {
+        color: $primary-color;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .tours-hero-price {
+    grid-area: price;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 5px;
+
+    .tours-hero-price-label {
+      font-size: 0.9rem;
+      color: $medium-gray;
+    }
+
+    .tours-hero-price-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $primary-color;
+    }
+  }
 
   .pri-btn {
-    padding: 10px 20px; // Réduit pour ne pas prendre toute la largeur
-    width: auto; // Pas de pleine largeur
-    display: inline-block; // Comportement naturel
+    grid-area: button;
+    padding: 12px 25px;
+    align-self: start;
+    font-size: 1rem;
   }
 
-  @media (max-width: 768px) {
-    text-align: center; // Centré sur mobile
-  }
-}
-
-.tours-hero-desc {
-  font-size: 1rem; // Comme vos paragraphes
-  color: $medium-gray;
-  line-height: 1.8; // Espacement décontracté
-  margin-bottom: 25px; // Aligné sur vos paragraphes
-}
-
-.tours-hero-price {
-  display: flex;
-  align-items: baseline;
-  gap: 8px; // Espacement léger
-  margin-bottom: 25px; // Cohérent avec vos marges
-
-  .tours-hero-new-price {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: $primary-color; // Rouge Nike
-  }
-
-  .tours-hero-price-unit {
-    font-size: 0.875rem;
+  .tours-hero-note {
+    grid-area: button;
+    font-size: 0.9rem;
     color: $medium-gray;
+    font-style: italic;
   }
 }
 
-// Offers Row (remplace la grille)
+.tours-hero-image {
+  flex: 1;
+  position: relative;
+
+  .tours-hero-slide {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .tours-hero-bullets {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+
+  .tours-hero-bullet {
+    width: 12px;
+    height: 12px;
+    background: $light-gray;
+    border-radius: 50%;
+    cursor: pointer;
+    @include transition(background);
+
+    &.active {
+      background: $primary-color;
+    }
+  }
+}
+
 .tours-offers-row {
   display: flex;
-  flex-direction: row;
-  gap: 25px; // Espacement comme dans vos grilles
-  overflow-x: auto; // Défilement horizontal si nécessaire
-  justify-content: center; // Centré si moins d’éléments que la largeur
-  padding-bottom: 10px; // Pour éviter la coupure en bas lors du scroll
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .tours-offer-card {
-  background: $white;
-  border-radius: 15px; // Coins arrondis comme vos cartes
+  width: 220px;
+  border-radius: 15px;
   overflow: hidden;
-  text-decoration: none;
-  box-shadow: $shadow-light; // Ombre légère
-  @include transition(transform); // Transition comme vos cartes
-  flex: 0 0 250px; // Largeur fixe pour chaque carte
-  max-width: 250px; // Limite la largeur
+  box-shadow: $shadow-light;
+  @include transition(transform);
 
   &:hover {
-    transform: translateY(-10px); // Décalage comme vos cartes
-  }
-}
-
-.tours-offer-image {
-  width: 100%;
-  height: 150px; // Conservé
-  object-fit: cover;
-}
-
-.tours-offer-content {
-  padding: 15px; // Padding comme dans vos cartes
-  text-align: left;
-
-  h6 {
-    font-size: 1rem; // Aligné sur vos h6
-    font-weight: 500;
-    color: $primary-text-color; // Gris foncé
-    margin-bottom: 0.35rem; // Comme vos h6
-    letter-spacing: 0;
-    text-transform: uppercase; // Cohérent avec vos titres
+    transform: translateY(-10px);
   }
 
-  .tours-offer-price {
-    font-size: 1.1rem; // Légèrement plus grand que dans vos cartes
-    color: $primary-color; // Rouge Nike
-    font-weight: 600;
+  .tours-offer-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .tours-offer-content {
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .tours-offer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h6 {
+      font-size: 1.1rem;
+      color: $primary-text-color;
+      margin: 0;
+      font-family: 'Futura', sans-serif;
+    }
+
+    .tours-offer-stars {
+      display: flex;
+      gap: 3px;
+
+      .fas.fa-star {
+        font-size: 0.9rem;
+        color: $primary-color;
+      }
+    }
+
+    .tours-offer-location {
+      font-size: 0.9rem;
+      color: $medium-gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+
+      .fas {
+        color: $primary-color;
+        font-size: 0.9rem;
+      }
+    }
+
+    .tours-offer-price {
+      font-size: 1rem;
+      color: $primary-color;
+      font-weight: 600;
+    }
+
+    .tours-offer-link {
+      font-size: 0.9rem;
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 500;
+      @include transition(color);
+
+      &:hover {
+        color: darken($primary-color, 15%);
+        text-decoration: underline;
+      }
+    }
+
+    .tours-offer-note {
+      font-size: 0.85rem;
+      color: $medium-gray;
+      font-style: italic;
+    }
   }
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .tours-offer-card {
-    flex: 0 0 220px; // Réduit légèrement la largeur
-    max-width: 220px;
-  }
-}
-
 @media (max-width: 768px) {
-  .tours-hero-image {
-    height: 300px; // Réduit pour tablettes
-  }
-}
-
-@media (max-width: 600px) {
-  .tours-hero-image {
-    height: 200px; // Réduit pour mobile
+  .tours-hero {
+    flex-direction: column-reverse;
+    gap: 20px;
   }
 
-  .tours-hero-new-price {
+  .tours-hero-grid .title__text {
+    font-size: 1.8rem;
+  }
+
+  .tours-hero-grid .tours-hero-price-value {
     font-size: 1.5rem;
   }
 
+  .tours-hero-image .tours-hero-slide {
+    min-height: 300px;
+  }
+
+  .tours-hero-highlights {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tours-hero-grid .title__text {
+    font-size: 1.5rem;
+  }
+
+  .tours-hero-grid .tours-hero-price-value {
+    font-size: 1.3rem;
+  }
+
   .tours-offer-card {
-    flex: 0 0 200px; // Plus compact pour mobile
-    max-width: 200px;
+    width: 100%;
   }
 }

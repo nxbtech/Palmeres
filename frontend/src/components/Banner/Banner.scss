@@ -1,101 +1,179 @@
-.ban_sec {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 10%;
+@import '../../App.scss'; // On importe les variables et mixins du style général
+
+.banner-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px; // Aligné avec .page-container (réduit de 10% à une valeur fixe pour cohérence)
+  padding: 0 20px; // Ajout d'un padding horizontal léger
+}
+
+.banner-container {
+  width: 90%; // Plus large que 80% pour un effet plein écran, mais contrôlé
+  max-width: 1400px; // Aligné avec .page-container pour cohérence
+}
+
+.banner-image {
+  position: relative;
+  border-radius: 15px; // Coins légèrement plus arrondis pour un look moderne
+  overflow: hidden;
+  box-shadow: $shadow-medium; // Ombre subtile pour profondeur
+  transition: transform 0.3s ease-out;
+
+  &:hover {
+    transform: scale(1.02); // Léger zoom au survol pour dynamisme
   }
-  
-  .ban_container {
-    width: 80%; /* Réduit à 80% de la largeur */
-    max-width: 1200px;
-  }
-  
-  .ban_img {
+
+  img {
     width: 100%;
-    position: relative;
-    border-radius: 12px; /* Ajout du border-radius */
-    overflow: hidden;
-  }
-  
-  .ban_img img {
-    width: 100%;
-    height: 300px;
+    height: 400px; // Hauteur augmentée pour plus d’impact visuel
     object-fit: cover;
+    display: block;
   }
-  
-  .ban_text {
-    position: absolute;
-    top: 50%;
-    left: 6%;
-    transform: translateY(-50%);
-  }
-  
-  .ban_text strong {
-    font: 800 62.22px/70px "Montserrat", sans-serif;
-    color: #fff;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)); // Dégradé pour lisibilité
+  z-index: 1;
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 5%; // Légèrement réduit de 6% à 5% pour alignement
+  transform: translateY(-50%);
+  z-index: 2; // Au-dessus de l’overlay
+  color: $white;
+  padding: 20px; // Padding pour un effet "encadré" naturel
+  transition: opacity 0.3s ease-out;
+
+  strong {
+    display: block;
+    font-family: 'Futura', sans-serif; // Utilisation de Futura pour cohérence avec le thème
     text-transform: uppercase;
-  }
-  
-  .ban_text strong span {
-    font: 400 44.44px/52px "Montserrat", sans-serif;
-    letter-spacing: 3px;
-  }
-  
-  @media (min-width: 1200px) and (max-width: 1399px) {
-    .ban_text strong {
-      font-size: 50px;
-      line-height: 60px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+
+    .banner-subtitle {
+      font-size: 1.5rem; // Plus petit mais lisible
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: $accent-color;
+      opacity: 0.9;
     }
-    .ban_text strong span {
-      font-size: 37px;
-    }
-  }
-  
-  @media (min-width: 992px) and (max-width: 1199px) {
-    .ban_text strong {
-      font-size: 50px;
-      line-height: 60px;
-    }
-    .ban_text strong span {
-      font-size: 37px;
+
+    .banner-title {
+      font-size: 3.5rem; // Plus grand pour impact
+      font-weight: 700;
+      color: $white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); // Ombre pour contraste
     }
   }
-  
-  @media only screen and (max-width: 991px) {
-    .ban_text strong {
-      font-size: 35px;
-      line-height: 40px;
+}
+
+/* Responsive */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .banner-text strong {
+    .banner-subtitle {
+      font-size: 1.4rem;
     }
-    .ban_text strong span {
-      font-size: 28px;
-      line-height: 35px;
+    .banner-title {
+      font-size: 3rem;
+    }
+  }
+  .banner-image img {
+    height: 350px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .banner-text strong {
+    .banner-subtitle {
+      font-size: 1.3rem;
+    }
+    .banner-title {
+      font-size: 2.5rem;
+    }
+  }
+  .banner-image img {
+    height: 320px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .banner-text strong {
+    .banner-subtitle {
+      font-size: 1.2rem;
       letter-spacing: 2px;
     }
-  }
-  
-  @media only screen and (max-width: 767px) {
-    .ban_img img {
-      min-height: 290px;
-      object-fit: cover;
+    .banner-title {
+      font-size: 2rem;
+      line-height: 1.3;
     }
   }
-  
-  @media only screen and (max-width: 575px) {
-    .ban_text strong {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      width: 100%;
-      display: block;
+  .banner-image img {
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .banner-section {
+    margin-top: 60px; // Réduit pour mobile
+  }
+  .banner-container {
+    width: 95%;
+  }
+  .banner-image img {
+    height: 250px;
+  }
+  .banner-text {
+    padding: 15px;
+    left: 3%;
+  }
+  .banner-text strong {
+    .banner-subtitle {
+      font-size: 1rem;
+    }
+    .banner-title {
+      font-size: 1.75rem;
     }
   }
-  
-  @media only screen and (max-width: 480px) {
-    .ban_text strong span {
-      font-size: 22px;
-      line-height: 31px;
+}
+
+@media only screen and (max-width: 575px) {
+  .banner-text {
+    width: 90%; // Plus large pour éviter le débordement
+    text-align: left;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.7); // Fond sombre pour lisibilité sur mobile
+    border-radius: 8px;
+  }
+  .banner-text strong {
+    .banner-subtitle {
+      font-size: 0.875rem;
       letter-spacing: 1px;
     }
-    .ban_text {
-      left: 2%;
+    .banner-title {
+      font-size: 1.5rem;
     }
   }
+}
+
+@media only screen and (max-width: 480px) {
+  .banner-image img {
+    height: 200px;
+  }
+  .banner-text strong {
+    .banner-subtitle {
+      font-size: 0.75rem;
+    }
+    .banner-title {
+      font-size: 1.25rem;
+    }
+  }
+}

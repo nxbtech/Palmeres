@@ -2,9 +2,11 @@ const CoupDeCoeur = require('../models/CoupDeCoeur');
 
 exports.getItems = async (req, res) => {
   try {
-    const { category } = req.query;
-    const query = category ? { category } : {};
-    const items = await CoupDeCoeur.find(query);
+    const { category, highlighted } = req.query;
+    const query = {};
+    if (category) query.category = category;
+    if (highlighted === 'true') query.highlighted = true;
+    const items = await CoupDeCoeur.find(query).sort({ updatedAt: -1 }); // Tri par date de mise à jour
     res.json(items);
   } catch (error) {
     res.status(500).json({ message: 'Erreur serveur', error: error.message });

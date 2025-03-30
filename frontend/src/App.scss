@@ -1,11 +1,11 @@
 // Import des polices
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Futura:wght@700&display=swap'); // Remplace Montserrat par Futura
+@import url('https://fonts.googleapis.com/css2?family=Futura:wght@700&display=swap');
 
 // Variables Sass
-$primary-color: #ff1e00; // Rouge Nike moderne
-$secondary-color: #1a1a1a; // Noir mat pour un look audacieux
-$accent-color: #fff; // Blanc éclatant pour contraste
+$primary-color: #ff1e00;
+$secondary-color: #1a1a1a;
+$accent-color: #fff;
 $primary-text-color: #333;
 $medium-gray: #666;
 $light-gray: #999;
@@ -35,7 +35,7 @@ $shadow-medium: rgba(0, 0, 0, 0.15);
 }
 
 @mixin transition($properties...) {
-  transition: $properties 0.3s ease-out; // Plus rapide et fluide
+  transition: $properties 0.3s ease-out;
 }
 
 // Réinitialisation globale
@@ -54,18 +54,18 @@ body {
   line-height: 1.5;
 }
 
-// Titres avec Futura (style Nike)
+// Titres avec Futura
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Futura', sans-serif; // Police audacieuse et moderne
+  font-family: 'Futura', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 h1 {
-  font-size: 3rem; // Plus grand pour un impact fort
+  font-size: 3rem;
   font-weight: 700;
   color: $secondary-color;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Réduit de 2rem à 1.5rem */
   position: relative;
 
   &::after {
@@ -75,8 +75,8 @@ h1 {
     height: 6px;
     border-radius: 3px;
     position: absolute;
-    bottom: -12px;
-    left: 0; // Aligné à gauche pour un look asymétrique
+    bottom: -8px; /* Réduit de -12px à -8px */
+    left: 0;
     transform: none;
   }
 }
@@ -85,7 +85,7 @@ h2 {
   font-size: 0.7rem;
   font-weight: 700;
   color: $secondary-color;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem; /* Réduit de 1.75rem à 1.25rem */
   position: relative;
 
   &::after {
@@ -95,7 +95,7 @@ h2 {
     height: 4px;
     border-radius: 2px;
     position: absolute;
-    bottom: -10px;
+    bottom: -6px; /* Réduit de -10px à -6px */
     left: 0;
   }
 }
@@ -131,10 +131,10 @@ h6 {
 
 // Paragraphes
 p {
-  font-size: 1rem; // Légèrement plus grand pour lisibilité
+  font-size: 1rem;
   color: $medium-gray;
-  line-height: 1.8; // Plus d'espace pour une vibe décontractée
-  margin-bottom: 1.25rem;
+  line-height: 1.8;
+  margin-bottom: 1rem; /* Réduit de 1.25rem à 1rem */
 }
 
 // Liens
@@ -147,18 +147,18 @@ a {
 
   &:hover {
     color: darken($primary-color, 10%);
-    text-decoration: none; // Pas de soulignement, style Nike
+    text-decoration: none;
   }
 }
 
 // Boutons génériques (style Nike)
 button, .pri-btn {
-  padding: 12px 30px; // Plus large pour un look audacieux
+  padding: 12px 30px;
   display: inline-block;
-  background: $secondary-color; // Noir mat par défaut
+  background: $secondary-color;
   color: $accent-color;
-  border: 2px solid $secondary-color; // Bordure nette
-  border-radius: 0; // Pas de coins arrondis, style brut
+  border: 2px solid $secondary-color;
+  border-radius: 0;
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
@@ -168,9 +168,9 @@ button, .pri-btn {
   @include transition(background, color, transform);
 
   &:hover {
-    background: $primary-color; // Rouge au survol
+    background: $primary-color;
     color: $white;
-    transform: translateY(-2px); // Léger décalage vertical
+    transform: translateY(-2px);
   }
 }
 
@@ -198,7 +198,7 @@ button, .pri-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px; // Espacement moderne
+  gap: 15px; /* Réduit de 20px à 15px */
 }
 
 .sub-title__text {
@@ -225,30 +225,30 @@ button, .pri-btn {
     height: 5px;
     position: absolute;
     left: 0;
-    bottom: -8px;
-    width: 60px; // Plus court pour un look minimaliste
+    bottom: -6px; /* Réduit de -8px à -6px */
+    width: 60px;
     background: $primary-color;
   }
 }
 
 // Conteneur de page
 .page-container {
-  width: 90%; // Plus large pour un design aéré
-  max-width: 1400px; // Plus grand que 1200px pour un look moderne
-  margin: 40px auto; // Réduit de 100px/80px à 40px haut/bas
-  padding: 30px;
+  width: 90%;
+  max-width: 1400px;
+  margin: 20px auto; /* Réduit de 40px à 20px */
+  padding: 15px; /* Réduit de 30px à 15px */
   text-align: center;
 
   h1 {
     font-size: 2.5rem;
     color: $secondary-color;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Réduit de 25px à 15px */
   }
 
   p {
     font-size: 1.125rem;
     color: $medium-gray;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Réduit de 25px à 15px */
   }
 }
 
@@ -256,8 +256,8 @@ button, .pri-btn {
 @media only screen and (max-width: 1024px) {
   .page-container {
     width: 95%;
-    margin: 80px auto 60px;
-    padding: 20px;
+    margin: 15px auto; /* Réduit de 80px/60px à 15px */
+    padding: 10px; /* Réduit de 20px à 10px */
   }
 }
 
@@ -283,8 +283,8 @@ button, .pri-btn {
   }
   .page-container {
     width: 90%;
-    margin: 60px auto 40px;
-    padding: 15px;
+    margin: 10px auto; /* Réduit de 60px/40px à 10px */
+    padding: 10px;
   }
 }
 

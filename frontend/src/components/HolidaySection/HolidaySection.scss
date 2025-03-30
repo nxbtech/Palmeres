@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+@import '../../App.scss'; // Importe les variables SCSS globales ($primary-color, etc.)
 
 .holiday-page-wrap {
   position: relative;
@@ -43,19 +45,18 @@
 }
 
 .holiday-hero-info h2 {
-  font-family: 'Poppins', sans-serif; // Restaure explicitement la police Poppins
-  font-weight: 800; // Poids fort pour correspondre au style initial
+  font-family: 'Futura', sans-serif; // Remplace Poppins par Futura pour cohérence
+  font-weight: 800;
   font-size: clamp(2rem, 9vw, 5rem);
   line-height: clamp(2rem, 9vw, 5rem);
   text-transform: uppercase;
-  color: transparent; // Garde l'effet initial
-  -webkit-text-stroke: 3px #e0d4be; // Restaure l'effet de contour initial
-  text-decoration: none; // Supprime tout soulignement ou surlignement
-  border: none; // Supprime toute bordure
-  padding: 0; // Évite tout padding parasite
+  color: transparent;
+  -webkit-text-stroke: 3px $light-gray; // Utilise $light-gray au lieu de #e0d4be
+  text-decoration: none;
+  border: none;
+  padding: 0;
   position: relative;
 
-  // Supprime les pseudo-éléments globaux
   &::before,
   &::after {
     content: none !important;
@@ -63,18 +64,17 @@
 }
 
 .holiday-hero-info h1 {
-  font-family: 'Poppins', sans-serif; // Assure la cohérence avec h2
-  font-weight: 800; // Poids fort pour un style audacieux
-  color: #f5f5f5;
+  font-family: 'Futura', sans-serif; // Cohérence avec le reste
+  font-weight: 800;
+  color: $white; // Utilise $white au lieu de #f5f5f5
   font-size: clamp(3.2rem, 10vw, 7rem);
   text-transform: uppercase;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-  text-decoration: none; // Supprime les traits
-  border: none; // Supprime toute bordure
-  padding: 0; // Évite tout padding parasite
+  text-decoration: none;
+  border: none;
+  padding: 0;
   position: relative;
 
-  // Supprime les pseudo-éléments globaux
   &::before,
   &::after {
     content: none !important;
@@ -82,10 +82,10 @@
 }
 
 .holiday-hero-info h3 {
-  font-family: 'Poppins', sans-serif;
-  color: #f5f5f5;
+  font-family: 'Futura', sans-serif;
+  color: $white; // Cohérence avec $white
   font-size: 1.6rem;
-  font-weight: 400; // Plus léger pour contraste avec h1 et h2
+  font-weight: 400;
   margin-top: 2em;
 }
 
@@ -96,8 +96,38 @@
   background-position: center;
   background-repeat: no-repeat;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  position: relative; // Nécessaire pour positionner la vague
 }
 
+/* Conteneur maritime */
+.sea-container {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Vague */
+.wave {
+  position: absolute;
+  width: 150%;
+  height: 50px;
+  background: rgba($primary-color, 0.5); // Utilise $primary-color (#ff1e00) avec transparence
+  bottom: 0;
+  left: -25%;
+  border-radius: 20px;
+  animation: waveMove 4s infinite linear;
+}
+
+/* Animation */
+@keyframes waveMove {
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(25%); }
+}
+
+/* Responsive */
 @media screen and (max-width: 600px) {
   .holiday-hero-info h2 {
     font-size: clamp(1.5rem, 6vw, 3rem);
@@ -107,5 +137,11 @@
   }
   .holiday-hero-info h3 {
     font-size: 1.2rem;
+  }
+  .sea-container {
+    height: 60px;
+  }
+  .wave {
+    height: 30px;
   }
 }

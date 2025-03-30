@@ -30,7 +30,7 @@ import Profile from './pages/Profile';
 import CoupDeCoeurDetailPage from './pages/CoupDeCoeurDetailPage'; // Import ajouté
 import './App.scss';
 import CookieConsent from './components/CookieConsent/CookieConsent';
-import BonsPlans from './pages/BonsPlans'; // Ajustez le chemin
+// import BonsPlans from './pages/BonsPlans'; // Commenté pour le lancement initial
 import Calendar from './pages/Calendar'; // Ajustez le chemin
 
 const App = () => {
@@ -83,7 +83,7 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               {!acceptedCookies && <Route path="*" element={<Navigate to="/cookie-consent" />} />}
               <Route path="/cookie-consent" element={<CookieConsent onAccept={handleAcceptCookies} />} />
-              <Route path="/bons-plans" element={<BonsPlans />} />
+              {/* <Route path="/bons-plans" element={<BonsPlans />} /> */} {/* Commenté pour le lancement initial */}
               <Route path="/calendar" element={<Calendar />} />
             </Routes>
           </ErrorBoundary>

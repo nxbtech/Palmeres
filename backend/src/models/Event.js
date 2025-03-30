@@ -1,11 +1,11 @@
+// backend/src/models/Event.js
 const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  image: { type: String, required: true }, // URL de l'image locale
   date: { type: Date, required: true },
-  activities: [{ type: String }],
-  mainLink: { type: String, required: true },
+  activities: [{ type: String }], // Optionnel
+  mainLink: { type: String }, // Optionnel
   description: { type: String, required: true },
 }, { timestamps: true });
 

@@ -16,8 +16,12 @@ const DestinationsSection = () => {
         return res.json();
       })
       .then((data) => {
-        const sortedEvents = data.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 6);
-        setEvents(sortedEvents);
+        const currentDate = new Date('2025-03-30');
+        const upcomingEvents = data
+          .filter((event) => new Date(event.date) >= currentDate) // Filtrer les événements futurs
+          .sort((a, b) => new Date(a.date) - new Date(b.date)) // Trier par date croissante
+          .slice(0, 4); // Prendre les 4 premiers (les plus proches)
+        setEvents(upcomingEvents);
         setError(null);
       })
       .catch((err) => {
@@ -27,37 +31,34 @@ const DestinationsSection = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (events.length === 0) return <p>Aucun événement disponible.</p>;
+  if (loading) return <div className="events-loader"><div className="loader-circle"></div><p>Chargement...</p></div>;
+  if (error) return <p className="events-error">{error}</p>;
+  if (events.length === 0) return <p className="events-empty">Aucun événement à venir prochainement.</p>;
 
   return (
     <section className="events-section">
       <div className="events-container">
-        <div className="events-subtitle">À venir</div>
-        <h2 className="events-title">Événements</h2>
+        <h2 className="events-title">Prochains Événements</h2>
         <div className="events-grid">
-          {events.map((event) => (
-            <div key={event._id} className="event-card">
-              <img src={event.image} alt={event.name} className="event-image" />
-              <div className="event-info">
-                <h3>{event.name}</h3>
-                <p>
-                  {format(new Date(event.date), 'd MMMM yyyy', { locale: fr })}
-                </p>
+          {events.map((event, index) => (
+            <div key={event._id} className={`event-card event-card-${index}`}>
+              <div className="event-date">
+                <span className="day">{format(new Date(event.date), 'dd')}</span>
+                <span className="month">{format(new Date(event.date), 'MMM', { locale: fr }).toUpperCase()}</span>
               </div>
-              <div className="event-overlay">
-                <p>{event.description || 'Détails de l’événement à venir.'}</p>
+              <div className="event-details">
+                <h3>{event.name}</h3>
+                <p>{event.description}</p>
+                {event.mainLink && (
+                  <a href={event.mainLink} target="_blank" rel="noopener noreferrer" className="event-link">
+                    En savoir plus
+                  </a>
+                )}
               </div>
             </div>
           ))}
         </div>
-        <div className="events-more">
-          <a href="/calendar" className="events-more-link">
-            En savoir plus
-            <i className="fas fa-arrow-right events-more-icon"></i>
-          </a>
-        </div>
+        <a href="/calendar" className="pri-btn events-more-btn">Voir tout</a>
       </div>
     </section>
   );

@@ -1,137 +1,186 @@
-// Import du fichier global pour accéder aux mixins et variables
 @import '../../App.scss';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 .events-section {
-  padding: 4rem 0;
+  padding: 60px 0;
 }
 
 .events-container {
-  width: 90%;
-  max-width: 1080px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-}
-
-.events-subtitle {
-  @extend .sub-title__text;
+  @extend .page-container;
+  max-width: 1200px;
 }
 
 .events-title {
-  @extend .title__text; // Utilise le style global pour les titres
-  margin-bottom: 2rem;
+  font-family: 'Futura', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: $primary-text-color;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  &::after {
+    content: '';
+    width: 80px;
+    height: 4px;
+    background: $primary-color;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  display: flex; // Une seule ligne horizontale
+  flex-wrap: nowrap; // Pas de retour à la ligne
+  gap: 20px; // Espacement entre les cartes
+  justify-content: center; // Centrer les cartes si moins de 5
+  overflow-x: auto; // Défilement horizontal si l’écran est trop petit
 }
 
 .event-card {
-  position: relative;
-  height: 350px;
-  border-radius: 8px;
-  overflow: hidden;
   background: $white;
-  @include transition(transform, box-shadow);
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px $shadow-medium;
-
-    .event-overlay {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-.event-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(90%);
-}
-
-.event-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  color: $white;
-
-  h3,
-  p {
-    color: $white;
-  }
-}
-
-.event-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  box-shadow: $shadow-light;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(20px);
-  @include transition(opacity, transform);
+  text-align: center;
+  @include transition(transform);
+  width: 220px; // Largeur fixe pour chaque carte
+  flex-shrink: 0; // Empêche les cartes de rétrécir
 
-  p {
-    color: $white;
-    padding: 0 1rem;
-    font-size: 0.875rem;
+  &:hover {
+    transform: translateY(-10px);
   }
 }
 
-.events-more {
-  text-align: right;
-  margin-top: 1.5rem;
+.event-date {
+  background: $primary-color;
+  color: $white;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .day {
+    font-family: 'Futura', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .month {
+    font-family: 'Futura', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
 }
 
-.events-more-link {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.875rem; // Taille cohérente avec vos paragraphes et liens
-  color: $medium-gray; // Gris moyen discret
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  @include transition(color);
+.event-details {
+  padding: 15px;
+  flex: 1;
+  display: grid; // Organisation interne avec une grille
+  grid-template-areas:
+    "title"
+    "desc"
+    "link";
+  grid-template-rows: auto 1fr auto; // Titre, description, lien
+  gap: 10px;
+  min-height: 150px; // Hauteur minimale pour uniformité
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: $primary-color; // Passage à la couleur primaire au survol
+  h3 {
+    grid-area: title;
+    font-family: 'Futura', sans-serif;
+    font-size: 1.1rem;
+    color: $primary-text-color;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; // Limite à 2 lignes
+    -webkit-box-orient: vertical;
+  }
+
+  p {
+    grid-area: desc;
+    font-size: 0.85rem;
+    color: $medium-gray;
+    margin: 0;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; // Limite à 3 lignes
+    -webkit-box-orient: vertical;
+  }
+
+  .event-link {
+    grid-area: link;
+    font-size: 0.85rem;
+    color: $primary-color;
     text-decoration: none;
-    outline: none;
+    font-weight: 500;
+    @include transition(color);
 
- .events-more-icon {
-      transform: translateX(5px); // Déplacement léger de l'icône au survol
+    &:hover {
+      color: darken($primary-color, 15%);
+      text-decoration: underline;
     }
   }
 }
 
-.events-more-icon {
-  margin-left: 0.5rem;
-  font-size: 0.75rem; // Icône petite et discrète
-  transition: transform 0.3s ease-in-out;
+/* Ajustement spécifique du bouton avec spécificité accrue */
+.pri-btn.events-more-btn {
+  margin: 30px auto 0 !important;
+  padding: 12px 30px !important;
+  font-size: 1rem !important;
+  width: 200px !important;
+  display: block !important;
 }
 
-@media only screen and (max-width: 600px) {
-  .events-grid {
-    grid-template-columns: 1fr;
+/* Responsive */
+@media (max-width: 768px) {
+  .events-title {
+    font-size: 2.2rem;
   }
 
-  .events-more {
-    text-align: center;
-    margin-top: 1rem;
+  .event-date .day {
+    font-size: 1.5rem;
+  }
+
+  .event-date .month {
+    font-size: 0.9rem;
+  }
+
+  .event-details h3 {
+    font-size: 1rem;
+  }
+
+  .pri-btn.events-more-btn {
+    padding: 10px 25px !important;
+    font-size: 0.9rem !important;
+    width: 180px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-title {
+    font-size: 1.8rem;
+  }
+
+  .pri-btn.events-more-btn {
+    padding: 8px 20px !important;
+    font-size: 0.85rem !important;
+    width: 160px !important;
   }
 }

@@ -1,157 +1,280 @@
-@import '../../App.scss'; // Importe les styles globaux
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
+/* Réinitialisation exacte de l'exemple */
+h1, h2, h3, h4, h5, h6 {}
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  outline: none;
+}
+
+a,
+a:active,
+a:focus {
+  color: #333;
+  text-decoration: none;
+  transition-timing-function: ease-in-out;
+  -ms-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  transition-duration: .2s;
+  -ms-transition-duration: .2s;
+  -moz-transition-duration: .2s;
+  -webkit-transition-duration: .2s;
+  -o-transition-duration: .2s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Style du footer */
 .footer {
-  padding: 40px 0; // Padding réduit pour simplicité
-  background: $secondary-color; // Noir mat, comme vos sections
-  color: $white;
+  background: #000; // Fond uni noir comme demandé
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
 
-  &-container {
-    @extend .page-container; // Réutilise page-container (90%, max-width 1400px)
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px; // Espacement comme vos grilles
-    justify-content: space-between;
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-lg-4,
+.col-md-4,
+.col-sm-4,
+.col-xs-12 {
+  flex: 1;
+  min-width: 220px;
+  margin-bottom: 30px;
+}
+
+.single_footer {}
+@media only screen and (max-width: 768px) {
+  .single_footer {
+    margin-bottom: 30px;
   }
+}
 
-  &-column {
-    flex: 1;
-    min-width: 200px; // Largeur minimale pour éviter l’écrasement
+.single_footer h4 {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.single_footer h4::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 40px;
+  background: #fff;
+  margin-top: 20px;
+}
+
+.single_footer p { color: #fff; }
+
+.single_footer ul li a {
+  color: #fff;
+  transition: all 0.3s ease 0s;
+  line-height: 36px;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+
+.single_footer ul li a:hover {
+  color: #ff3666;
+}
+
+.single_footer_address {}
+
+.signup_form {
+  margin-top: 15px;
+}
+
+.subscribe {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.subscribe__input {
+  background-color: #fff;
+  border: medium none;
+  border-radius: 5px;
+  color: #333;
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  height: 60px;
+  letter-spacing: 0.4px;
+  margin: 0;
+  padding: 0 150px 0 20px;
+  text-align: center;
+  text-transform: capitalize;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .subscribe__input {
+    padding: 0 50px 0 20px;
   }
+}
 
-  &-logo {
-    max-width: 120px; // Logo compact
-    height: auto;
-    margin-bottom: 15px;
+.subscribe__btn {
+  background-color: transparent;
+  border-radius: 0 25px 25px 0;
+  color: #01c7e9;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  height: 60px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60px;
+}
+
+.subscribe__btn i {
+  transition: all 0.3s ease 0s;
+}
+
+@media only screen and (max-width: 768px) {
+  .subscribe__btn {
+    right: 0px;
   }
+}
 
-  &-desc {
-    font-size: 0.875rem; // Comme vos petits textes
-    color: rgba($white, 0.8); // Blanc légèrement transparent
-    line-height: 1.6;
-    margin: 0;
+.subscribe__btn:hover i {
+  color: #ff3666;
+}
+
+.subscribe_success {
+  color: #fff;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.social_profile {
+  margin-top: 40px;
+}
+
+.social_profile ul {
+  display: flex;
+  gap: 10px;
+}
+
+.social_profile ul li {
+  float: left;
+}
+
+.social_profile ul li a {
+  text-align: center;
+  border: 0px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+  margin: 0px 5px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-width: 768px) {
+  .social_profile ul li a {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
+}
 
-  &-title {
-    font-family: 'Futura', sans-serif; // Comme vos titres
-    font-size: 1.25rem; // Plus petit que vos h2
-    font-weight: 700;
-    text-transform: uppercase;
-    color: $white;
-    margin-bottom: 15px;
+@media only screen and (max-width: 480px) {
+  .social_profile ul li a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
   }
+}
 
-  &-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.social_profile ul li a:hover {
+  background: #ff3666;
+  border: 1px solid #ff3666;
+  color: #fff;
+}
 
-    li {
-      margin-bottom: 10px;
+.col-lg-12,
+.col-sm-12,
+.col-xs-12 {
+  width: 100%;
+}
 
-      a {
-        font-size: 0.875rem;
-        color: rgba($white, 0.8);
-        text-decoration: none;
-        @include transition(color);
-        &:hover {
-          color: $primary-color; // Rouge Nike au survol
-        }
-      }
-    }
-  }
+.footer_trust {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 10px;
+}
 
-  &-newsletter {
-    display: flex;
-    gap: 10px; // Espacement comme vos formulaires
-    flex-wrap: wrap; // Retour à la ligne si nécessaire
-  }
+.footer_trust i {
+  font-size: 18px;
+}
 
-  &-input {
-    flex: 1;
-    padding: 10px 15px; // Comme vos inputs
-    font-size: 0.875rem;
-    border: 1px solid rgba($white, 0.5);
-    border-radius: 0; // Style brut
-    background: $white;
-    color: $primary-text-color; // Gris foncé
-    @include transition(border-color);
-    &::placeholder {
-      color: $medium-gray;
-    }
-    &:focus {
-      border-color: $primary-color; // Rouge Nike
-      outline: none;
-    }
-  }
+.copyright {
+  margin-top: 70px;
+  padding-top: 40px;
+  color: #fff;
+  font-size: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
 
-  .pri-btn {
-    padding: 10px 20px; // Réduit par rapport à 12px 30px
-    background: $white; // Fond blanc
-    color: $primary-color; // Texte rouge
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    @include transition(background, color, transform);
-    &:hover {
-      background: $primary-color; // Rouge au survol
-      color: $white;
-      transform: translateY(-2px);
-    }
-  }
+.copyright a {
+  color: #01c7e9;
+  transition: all 0.2s ease 0s;
+}
 
-  &-copyright {
-    margin-top: 30px;
-    padding: 15px 0;
-    background: $white; // Fond blanc
-    text-align: center;
-
-    p {
-      font-size: 0.875rem;
-      color: $primary-text-color; // Gris foncé
-      margin: 0;
-    }
-  }
+.copyright a:hover {
+  color: #ff3666;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .footer {
-    padding: 30px 0; // Réduit pour mobile
-  }
-
-  .footer-column {
-    flex: 1 1 100%; // Colonnes empilées sur mobile
-    text-align: center;
-
-    .footer-links {
-      li {
-        margin-bottom: 8px;
-      }
-    }
-
-    .footer-newsletter {
-      justify-content: center;
-    }
-  }
-
-  .footer-logo {
-    margin: 0 auto 15px;
-  }
-}
-
-@media (max-width: 600px) {
-  .footer-title {
-    font-size: 1rem; // Réduit pour mobile
-  }
-
-  .footer-input {
-    padding: 8px 12px;
-  }
-
-  .pri-btn {
-    padding: 8px 16px;
-    font-size: 0.75rem;
+  .col-lg-4,
+  .col-md-4,
+  .col-sm-4,
+  .col-xs-12 {
+    width: 100%;
   }
 }

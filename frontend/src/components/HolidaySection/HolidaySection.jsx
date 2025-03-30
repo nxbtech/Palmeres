@@ -37,7 +37,11 @@ const HolidaySection = () => {
               <div
                 className="holiday-hero-image"
                 style={{ backgroundImage: `url(${slide.image})` }}
-              />
+              >
+                <div className="sea-container">
+                  <div className="wave"></div>
+                </div>
+              </div>
               <div className="holiday-hero-info">
                 <h2>{slide.subtitle}</h2>
                 <h1>{slide.title}</h1>

@@ -87,7 +87,7 @@ const Header = () => {
             <ul className="nav-list">
               <li className="nav-item"><Link to="/" className="nav-link">Accueil</Link></li>
               <li className="nav-item"><Link to="/coup-de-coeur" className="nav-link">Coup de cœur</Link></li>
-              <li className="nav-item"><Link to="/bons-plans" className="nav-link">Bons Plans</Link></li>
+              {/* <li className="nav-item"><Link to="/bons-plans" className="nav-link">Bons Plans</Link></li> */} {/* Commenté pour le lancement initial */}
               <li className="nav-item"><Link to="/boutique" className="nav-link">Boutique</Link></li>
               <li className="nav-item"><Link to="/guides" className="nav-link">Guides</Link></li>
               <li className="nav-item"><Link to="/forum" className="nav-link">Forum</Link></li>
