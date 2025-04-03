@@ -41,6 +41,9 @@ const HolidaySection = () => {
                 <div className="sea-container">
                   <div className="wave"></div>
                 </div>
+                <a href="/boutique" className="holiday-cta-btn pri-btn">
+                  Découvrez la Boutique
+                </a>
               </div>
               <div className="holiday-hero-info">
                 <h2>{slide.subtitle}</h2>

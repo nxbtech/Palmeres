@@ -1,0 +1,53 @@
+// frontend/src/modules/GuidesModule/GuidesModule.scss
+@import '../../styles/App.scss';
+
+.guides-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.guides-error {
+  text-align: center;
+  padding: 20px;
+  color: $primary-color;
+}
+
+.guides-filters-section {
+  padding: 10px 0;
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+}
+
+.spotlight-card {
+  max-width: 600px;
+  margin: 0 auto;
+  .card-image img {
+    height: 300px;
+  }
+}
+
+.featured-card {
+  .card-image img {
+    height: 250px;
+  }
+}
+
+.item-card {
+  .card-image img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .guides-filters-section .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,25 @@
+// frontend/src/modules/CheckoutModule/CheckoutModule.scss
+@import '../../styles/App.scss';
+
+.checkout-module {
+  text-align: center;
+  padding: 20px;
+  height: 100vh;
+
+  h1 {
+    margin-top: 20%;
+    font-size: 2em;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

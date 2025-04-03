@@ -1,0 +1,12 @@
+// frontend/src/components/LinkButton/LinkButton.scss
+@import '../../styles/App.scss';
+
+.link-button {
+  color: $primary-color;
+  text-decoration: none;
+  font-size: 1.1em;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

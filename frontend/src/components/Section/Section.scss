@@ -1,0 +1,16 @@
+// frontend/src/components/Section/Section.scss
+@import '../../styles/App.scss';
+
+.section {
+  padding: 4rem 0;
+  background: #fafafa;
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $primary-text-color;
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+  }
+}

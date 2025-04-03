@@ -1,0 +1,8 @@
+// modules/TopStays/TopStays.scss
+@import '../../styles/App.scss';
+
+.stays-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}

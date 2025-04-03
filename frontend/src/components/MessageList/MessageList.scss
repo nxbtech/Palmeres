@@ -1,0 +1,78 @@
+// frontend/src/components/MessageList/MessageList.scss
+@import '../../styles/App.scss';
+
+.message-list {
+  flex-grow: 1;
+  padding: 1rem 2rem;
+  overflow-y: auto;
+  height: 500px;
+
+  &-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.message-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &.self {
+    align-items: flex-end;
+
+    .message-content {
+      background: lighten($primary-color, 20%);
+      color: $white;
+      border-radius: 8px 8px 0 8px;
+    }
+
+    .message-sender {
+      color: $medium-gray;
+      text-align: right;
+    }
+  }
+
+  .message-content {
+    background: $white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px 8px 8px 0;
+    max-width: 70%;
+    @include transition(background);
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+  }
+
+  .message-sender {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $primary-color;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.message-no-results {
+  text-align: center;
+  color: $medium-gray;
+  font-size: 0.875rem;
+  margin: 1.5rem 0;
+}
+
+.message-error {
+  color: darken($primary-color, 10%);
+  font-size: 0.875rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .message-content {
+    max-width: 85%;
+  }
+}

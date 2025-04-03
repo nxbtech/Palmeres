@@ -1,0 +1,48 @@
+// frontend/src/components/EventCard/EventCard.scss
+@import '../../styles/App.scss';
+.event-card.clean {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: $white;
+  border: 1px solid $medium-gray;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  box-shadow: $shadow-light;
+
+  &:hover {
+    box-shadow: $shadow-medium;
+  }
+
+  .event-card-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+    color: $white;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    font-weight: 600;
+
+    .day {
+      font-size: 1.2rem;
+    }
+
+    .month {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+  }
+
+  .event-card-content {
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: $primary-text-color;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+// frontend/src/components/MessageForm/MessageForm.scss
+@import '../../styles/App.scss';
+
+.message-form {
+  display: flex;
+  padding: 1rem 2rem;
+  background: $white;
+  border-top: 1px solid lighten($medium-gray, 20%);
+  gap: 0.75rem;
+
+  input {
+    flex-grow: 1;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid $light-gray;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    outline: none;
+    @include transition(border-color);
+
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+// frontend/src/components/DonationForm/DonationForm.scss
+@import '../../styles/App.scss';
+
+.donation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .amount-options {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .donation-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 100%;
+      padding: 0.75rem 3rem 0.75rem 1.5rem;
+      border: 1px solid $light-gray;
+      border-radius: 30px;
+      font-size: 1rem;
+      text-align: center;
+      @include transition(border-color, box-shadow);
+
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 5px rgba($primary-color, 0.3);
+        outline: none;
+      }
+    }
+
+    .donation-currency {
+      position: absolute;
+      right: 1.5rem;
+      color: $medium-gray;
+      font-size: 1rem;
+    }
+  }
+
+  .donation-support-message {
+    font-size: 0.875rem;
+    color: $primary-color;
+    font-style: italic;
+    min-height: 1.5rem;
+  }
+}

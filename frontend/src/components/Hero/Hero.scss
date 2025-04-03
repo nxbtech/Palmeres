@@ -1,0 +1,230 @@
+// frontend/src/components/Hero/Hero.scss
+@import '../../styles/App.scss';
+
+.hero {
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: $white;
+  margin-top: 5%;
+
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .hero-heading {
+      @include heading-1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-search-form {
+      @include shadow-light;
+      background-color: $white;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-bottom: 1.5rem;
+
+      .search-tabs {
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #e5e5e5;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+
+        button {
+          background: none;
+          border: none;
+          padding: 0.75rem 1rem;
+          font-size: 0.9rem;
+          color: $secondary-text-color;
+          cursor: pointer;
+          @include transition(color, border-bottom);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          i {
+            font-size: 0.9rem;
+          }
+
+          &.active {
+            color: $primary-text-color;
+            border-bottom: 2px solid $primary-color;
+            font-weight: 600;
+          }
+
+          &:hover {
+            color: $primary-text-color;
+          }
+        }
+      }
+
+      .search-input-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.5rem;
+
+        .search-icon {
+          color: $medium-gray;
+          font-size: 1rem;
+          margin-right: 0.5rem;
+        }
+
+        input {
+          flex: 1;
+          max-width: 600px;
+          padding: 0.75rem 1rem;
+          border: 1px solid #e5e5e5;
+          border-radius: 25px;
+          font-size: 1rem;
+          outline: none;
+          color: $primary-text-color;
+
+          &::placeholder {
+            color: $medium-gray;
+          }
+        }
+
+        button {
+          @include button-accent;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    .hero-banner {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 2rem;
+      text-align: left;
+      color: $white;
+      height: 300px;
+      display: flex;
+      align-items: center;
+
+      .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+      }
+
+      .banner-content {
+        position: relative;
+        z-index: 1;
+        max-width: 50%;
+
+        .banner-tag {
+          display: inline-block;
+          background-color: rgba(255, 255, 255, 0.2);
+          padding: 0.25rem 0.75rem;
+          border-radius: 15px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+
+          .beta {
+            background-color: $white;
+            color: $primary-text-color;
+            padding: 0.1rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+            font-size: 0.65rem;
+          }
+        }
+
+        h2 {
+          @include heading-2;
+          margin-bottom: 0.75rem;
+        }
+
+        p {
+          @include body-text-white;
+          margin-bottom: 1.5rem;
+        }
+
+        button {
+          @include button-secondary;
+        }
+      }
+    }
+
+    .hero-quick-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+
+      a {
+        color: $primary-color;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 1px solid $primary-color;
+        border-radius: 15px;
+        @include transition(background-color, color);
+
+        &:hover {
+          background-color: $primary-color;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  @include respond-to('small') {
+    .hero-content {
+      .hero-heading {
+        font-size: 1.8rem;
+      }
+
+      .hero-search-form {
+        .search-tabs {
+          button {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+          }
+        }
+
+        .search-input-wrapper {
+          flex-direction: column;
+          gap: 0.5rem;
+
+          input {
+            width: 100%;
+            border-radius: 25px;
+          }
+
+          button {
+            width: 100%;
+            border-radius: 25px;
+          }
+        }
+      }
+
+      .hero-banner {
+        height: 250px;
+
+        .banner-content {
+          max-width: 100%;
+
+          h2 {
+            font-size: 1.5rem;
+          }
+
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}

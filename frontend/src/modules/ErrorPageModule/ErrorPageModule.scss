@@ -1,0 +1,27 @@
+// frontend/src/modules/ErrorPageModule/ErrorPageModule.scss
+@import '../../styles/App.scss';
+
+.error-page-module {
+  text-align: center;
+  padding: 20px;
+
+  h1 {
+    font-size: 2em;
+    color: darken($primary-color, 20%);
+  }
+
+  p {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    font-size: 1.1em;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

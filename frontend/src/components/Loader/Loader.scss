@@ -1,0 +1,30 @@
+// frontend/src/components/Loader/Loader.scss
+@import '../../styles/App.scss';
+
+.loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 6px solid $light-gray;
+    border-top: 6px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1.2s ease-in-out infinite;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: $medium-gray;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

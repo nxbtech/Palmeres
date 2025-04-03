@@ -1,0 +1,14 @@
+// modules/EventsPreview/EventsPreview.scss
+@import '../../styles/App.scss';
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 2rem;
+}
+
+.more-btn {
+  display: block;
+  margin: 0 auto;
+}

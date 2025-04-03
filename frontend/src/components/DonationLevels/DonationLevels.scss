@@ -1,0 +1,41 @@
+// frontend/src/components/DonationLevels/DonationLevels.scss
+@import '../../styles/App.scss';
+
+.donation-levels {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+
+  .donation-level {
+    flex: 1;
+    min-width: 150px;
+    padding: 1rem;
+    background: lighten($primary-color, 45%);
+    border-radius: 8px;
+    @include transition(transform, background);
+
+    &:hover {
+      transform: translateY(-5px);
+      background: lighten($primary-color, 40%);
+    }
+
+    i {
+      font-size: 2rem;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: $primary-text-color;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: $medium-gray;
+    }
+  }
+}

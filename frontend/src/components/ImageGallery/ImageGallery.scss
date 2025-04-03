@@ -1,0 +1,52 @@
+// frontend/src/components/ImageGallery/ImageGallery.scss
+@import '../../styles/App.scss';
+
+.image-gallery {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.main-image {
+  margin-bottom: 1rem;
+
+  img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: $shadow-light;
+  }
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+}
+
+.thumbnail {
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    @include transition(opacity);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .main-image img {
+    height: 300px;
+  }
+
+  .thumbnail img {
+    height: 80px;
+  }
+}

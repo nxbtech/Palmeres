@@ -1,0 +1,18 @@
+// frontend/src/modules/PanierModule/PanierModule.scss
+@import '../../styles/App.scss';
+
+.panier-module {
+  text-align: center;
+  padding: 20px;
+
+  h1 {
+    font-size: 2rem;
+    color: $primary-text-color;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $medium-gray;
+  }
+}

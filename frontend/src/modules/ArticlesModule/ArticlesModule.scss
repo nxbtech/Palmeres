@@ -1,0 +1,14 @@
+// frontend/src/modules/ArticlesModule/ArticlesModule.scss
+@import '../../styles/App.scss';
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.error {
+  color: $primary-color;
+  text-align: center;
+  padding: 20px;
+}

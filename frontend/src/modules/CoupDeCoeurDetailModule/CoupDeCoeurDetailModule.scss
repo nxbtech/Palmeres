@@ -1,0 +1,206 @@
+// frontend/src/modules/CoupDeCoeurDetailModule/CoupDeCoeurDetailModule.scss
+@import '../../styles/App.scss';
+
+.cdc-detail-section {
+  padding: 4rem 0;
+}
+
+.cdc-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cdc-detail-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cdc-image-gallery {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.cdc-main-image {
+  margin-bottom: 1rem;
+  img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: $shadow-light;
+  }
+}
+
+.cdc-thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+}
+
+.cdc-thumbnail {
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    @include transition(opacity);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.cdc-info-grid {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.cdc-title {
+  font-size: 2rem;
+  color: $primary-text-color;
+  margin-bottom: 1rem;
+}
+
+.cdc-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cdc-category {
+  font-size: 0.875rem;
+  color: $medium-gray;
+  text-transform: uppercase;
+}
+
+.cdc-rating {
+  .fas.fa-star {
+    font-size: 1rem;
+    color: $light-gray;
+    &.filled {
+      color: $primary-color;
+    }
+  }
+  .cdc-michelin {
+    margin-left: 0.5rem;
+    .fas.fa-star.michelin {
+      color: #ffcc00;
+    }
+  }
+}
+
+.cdc-description {
+  font-size: 1rem;
+  color: $medium-gray;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.cdc-details {
+  .cdc-icons-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cdc-detail-item {
+    cursor: pointer;
+    i {
+      font-size: 1.5rem;
+      color: $primary-color;
+      @include transition(color);
+      &:hover {
+        color: darken($primary-color, 15%);
+      }
+    }
+  }
+
+  .cdc-info-display {
+    font-size: 0.875rem;
+    color: $primary-text-color;
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        margin-bottom: 0.5rem;
+        &:before {
+          content: '•';
+          color: $primary-color;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.cdc-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.cdc-related-card {
+  .card-image img {
+    height: 200px;
+  }
+}
+
+.cdc-see-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.cdc-loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 6px solid $light-gray;
+    border-top: 6px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1.2s ease-in-out infinite;
+  }
+  p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: $medium-gray;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cdc-error {
+  text-align: center;
+  padding: 20px;
+  color: $primary-color;
+}
+
+@media (max-width: 768px) {
+  .cdc-main-image img {
+    height: 300px;
+  }
+  .cdc-thumbnail img {
+    height: 80px;
+  }
+}

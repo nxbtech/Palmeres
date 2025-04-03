@@ -1,0 +1,13 @@
+// frontend/src/components/ErrorMessage/ErrorMessage.scss
+@import '../../styles/App.scss';
+
+.error-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 1rem;
+  color: $primary-color;
+
+  p {
+    margin-bottom: 1rem;
+  }
+}

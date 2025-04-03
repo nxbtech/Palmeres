@@ -1,0 +1,28 @@
+// frontend/src/pages/Home/Home.scss
+@import '../../styles/App.scss';
+
+.home {
+  .event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .guide-card,
+  .bestseller-card {
+    .card-image img {
+      height: 200px;
+    }
+
+    .card-content {
+      h3 {
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

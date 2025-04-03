@@ -1,0 +1,37 @@
+// frontend/src/components/FilterGroup/FilterGroup.scss
+@import '../../styles/App.scss';
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  label {
+    font-size: 1rem;
+    color: $primary-text-color;
+    font-weight: 500;
+  }
+
+  select {
+    padding: 8px 12px;
+    border: 1px solid $light-gray;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: $primary-text-color;
+    background: $white;
+    cursor: pointer;
+    @include transition(border-color);
+    &:hover,
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  &.checkbox {
+    input {
+      margin-right: 5px;
+      cursor: pointer;
+    }
+  }
+}

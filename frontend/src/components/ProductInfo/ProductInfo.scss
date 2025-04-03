@@ -1,0 +1,78 @@
+// frontend/src/components/ProductInfo/ProductInfo.scss
+@import '../../styles/App.scss';
+
+.product-info {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 20px;
+
+  p {
+    font-size: 0.875rem;
+    color: $medium-gray;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: $primary-text-color;
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    margin: 20px 0;
+    font-size: 1.375rem;
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  select {
+    display: block;
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: $primary-text-color;
+    background: $white;
+    cursor: pointer;
+    @include transition(border-color);
+
+    &:hover,
+    &:focus {
+      border-color: darken($primary-color, 10%);
+      outline: none;
+    }
+  }
+
+  input {
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 1.25rem;
+    margin: 10px 10px 10px 0;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    color: $primary-text-color;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-info {
+    padding: 20px 0;
+
+    h1 {
+      font-size: 1.625rem;
+      line-height: 2rem;
+    }
+  }
+}

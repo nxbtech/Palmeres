@@ -1,0 +1,43 @@
+// frontend/src/modules/DonateModule/DonateModule.scss
+@import '../../styles/App.scss';
+
+.donate-module {
+  padding: 4rem 0;
+}
+
+.donate-container {
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background: $white;
+  border-radius: 12px;
+  box-shadow: $shadow-light;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    color: $primary-text-color;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.donate-intro {
+  font-size: 1.125rem;
+  color: $medium-gray;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.donate-success {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: $primary-color;
+  font-weight: 500;
+}
+
+.donate-error {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: darken($primary-color, 20%);
+}

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap");
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-@import '../../App.scss'; // Importe les variables SCSS globales ($primary-color, etc.)
+@import '../../App.scss'; // Importe les variables et styles globaux
 
 .holiday-page-wrap {
   position: relative;
@@ -45,13 +45,13 @@
 }
 
 .holiday-hero-info h2 {
-  font-family: 'Futura', sans-serif; // Remplace Poppins par Futura pour cohérence
+  font-family: 'Futura', sans-serif;
   font-weight: 800;
   font-size: clamp(2rem, 9vw, 5rem);
   line-height: clamp(2rem, 9vw, 5rem);
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 3px $light-gray; // Utilise $light-gray au lieu de #e0d4be
+  -webkit-text-stroke: 3px $light-gray;
   text-decoration: none;
   border: none;
   padding: 0;
@@ -64,9 +64,9 @@
 }
 
 .holiday-hero-info h1 {
-  font-family: 'Futura', sans-serif; // Cohérence avec le reste
+  font-family: 'Futura', sans-serif;
   font-weight: 800;
-  color: $white; // Utilise $white au lieu de #f5f5f5
+  color: $white;
   font-size: clamp(3.2rem, 10vw, 7rem);
   text-transform: uppercase;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
@@ -83,7 +83,7 @@
 
 .holiday-hero-info h3 {
   font-family: 'Futura', sans-serif;
-  color: $white; // Cohérence avec $white
+  color: $white;
   font-size: 1.6rem;
   font-weight: 400;
   margin-top: 2em;
@@ -96,7 +96,7 @@
   background-position: center;
   background-repeat: no-repeat;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  position: relative; // Nécessaire pour positionner la vague
+  position: relative;
 }
 
 /* Conteneur maritime */
@@ -114,11 +114,19 @@
   position: absolute;
   width: 150%;
   height: 50px;
-  background: rgba($primary-color, 0.5); // Utilise $primary-color (#ff1e00) avec transparence
+  background: rgba($primary-color, 0.5);
   bottom: 0;
   left: -25%;
   border-radius: 20px;
   animation: waveMove 4s infinite linear;
+}
+
+/* Bouton CTA */
+.holiday-cta-btn {
+  position: absolute;
+  bottom: 10%; // Remonté de 20px à 50px
+  right: 10%; // Décalé de 20px à 5% pour plus de centrage
+  z-index: 9; // Au-dessus de la vague
 }
 
 /* Animation */
@@ -143,5 +151,9 @@
   }
   .wave {
     height: 30px;
+  }
+  .holiday-cta-btn {
+    bottom: 40px; // Légèrement remonté sur mobile
+    right: 5%; // Maintenu à 5%
   }
 }

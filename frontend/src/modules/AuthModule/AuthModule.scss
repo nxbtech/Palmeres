@@ -1,0 +1,165 @@
+// frontend/src/modules/AuthModule/AuthModule.scss
+@import '../../styles/App.scss';
+
+.auth-module {
+  padding: 4rem 0;
+}
+
+.auth-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.auth-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.auth-col {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem;
+}
+
+.auth-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+
+  &-title {
+    font-size: 1.75rem;
+    color: $primary-text-color;
+    margin-bottom: 1.5rem;
+  }
+
+  &-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+      color: $medium-gray;
+      margin-bottom: 1rem;
+
+      i {
+        color: $primary-color;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+.auth-support-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-form-col {
+  .auth-form-container {
+    padding: 2rem;
+    background: $white;
+    border-radius: 12px;
+    box-shadow: $shadow-light;
+  }
+}
+
+.auth-form-btn {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  margin-bottom: 2rem;
+
+  span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $medium-gray;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    @include transition(color);
+
+    &.active {
+      color: $primary-color;
+    }
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  #auth-indicator {
+    position: absolute;
+    bottom: -5px;
+    width: 50%;
+    height: 3px;
+    background: $primary-color;
+    @include transition(transform);
+
+    &.login {
+      transform: translateX(-50%);
+    }
+
+    &.register {
+      transform: translateX(50%);
+    }
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .form-group {
+    position: relative;
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: $medium-gray;
+      font-size: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid $light-gray;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      outline: none;
+      @include transition(border-color, box-shadow);
+
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 5px rgba($primary-color, 0.3);
+      }
+    }
+  }
+
+  .auth-forgot-link {
+    text-align: center;
+    color: $primary-color;
+    font-size: 0.875rem;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.auth-error {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: darken($primary-color, 10%);
+  text-align: center;
+}

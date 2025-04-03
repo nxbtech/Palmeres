@@ -1,0 +1,48 @@
+// frontend/src/components/RelatedItems/RelatedItems.scss
+@import '../../styles/App.scss';
+
+.related-items {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 25px;
+
+  .related-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px auto 50px;
+
+    h2 {
+      font-size: 1.5rem;
+      color: $primary-text-color;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: $primary-color;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .related-card {
+    .card-image img {
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+}

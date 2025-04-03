@@ -1,0 +1,15 @@
+// frontend/src/modules/ProductDetailModule/ProductDetailModule.scss
+@import '../../styles/App.scss';
+
+.product-detail-module {
+  max-width: 1080px;
+  margin: 80px auto 0;
+  padding: 0 25px;
+}
+
+.product-detail-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}

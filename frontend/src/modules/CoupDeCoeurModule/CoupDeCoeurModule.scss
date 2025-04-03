@@ -1,0 +1,99 @@
+// frontend/src/modules/CoupDeCoeurModule/CoupDeCoeurModule.scss
+@import '../../styles/App.scss';
+
+.cdc-loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 6px solid $light-gray;
+    border-top: 6px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1.2s ease-in-out infinite;
+  }
+  p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: $medium-gray;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cdc-error {
+  text-align: center;
+  padding: 20px;
+  color: $primary-color;
+}
+
+.spotlight-card {
+  max-width: 600px;
+  margin: 0 auto;
+  .card-image img {
+    height: 300px;
+  }
+}
+
+.monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.monthly-card {
+  .card-image img {
+    height: 250px;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.all-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.item-card {
+  .card-image img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .monthly-grid,
+  .all-items-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+}
